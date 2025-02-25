@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vijay Ramesh - AI Product Manager Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: -0.05em;
+            margin-bottom: 1rem;
+            z-index: 2;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #aaa;
+            z-index: 2;
+        }
+        
+        .quirky-intro {
+            max-width: 600px;
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            color: #ddd;
+            z-index: 2;
+            font-style: italic;
+        }
+        
+        .canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        section {
+            margin: 6rem 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            letter-spacing: -0.05em;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 2rem;
+        }
+        
+        .project-card {
+            border: 1px solid #333;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            border-color: #fff;
+        }
+        
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-description {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s ease;
+            color: #aaa;
+        }
+        
+        .project-card:hover .project-description {
+            height: 100px;
+        }
+        
+        .blogs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 2rem;
+        }
+        
+        .blog-card {
+            border: 1px solid #333;
+            padding: 1.5rem;
+        }
+        
+        .blog-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-excerpt {
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+        
+        .read-more {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 0.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            border-color: #aaa;
+        }
+        
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+        
+        .contact-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .social-link {
+            color: #fff;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            color: #aaa;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="canvas-container" id="neural-net-container"></div>
+        <h1>Vijay Ramesh</h1>
+        <h2>AI Product Manager</h2>
+        <p class="quirky-intro">Turning coffee into algorithms since 2015. I speak fluent Python, broken JavaScript, and can translate between engineers and executives with minimal data loss.</p>
+    </header>
+    
+    <div class="container">
+        <section id="projects">
+            <h3 class="section-title">Projects</h3>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h4 class="project-title">Neural Recommendation Engine</h4>
+                    <div class="project-description">
+                        <p>Developed an AI-powered recommendation system that increased user engagement by 37% and reduced churn by 18% over a six-month period.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4 class="project-title">Predictive Analytics Dashboard</h4>
+                    <div class="project-description">
+                        <p>Led cross-functional team to create a real-time analytics platform using machine learning models to forecast business metrics with 92% accuracy.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4 class="project-title">NLP Content Moderation</h4>
+                    <div class="project-description">
+                        <p>Architected an automated content moderation system using transformer models, reducing manual review time by 65% while maintaining safety standards.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4 class="project-title">Computer Vision Quality Control</h4>
+                    <div class="project-description">
+                        <p>Implemented a manufacturing quality control system using computer vision that reduced defects by 24% and improved production efficiency.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4 class="project-title">Voice Assistant Integration</h4>
+                    <div class="project-description">
+                        <p>Spearheaded the integration of voice assistant capabilities into legacy enterprise software, creating new natural language interfaces for core workflows.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h4 class="project-title">MLOps Pipeline Automation</h4>
+                    <div class="project-description">
+                        <p>Designed and implemented a comprehensive MLOps pipeline that reduced model deployment time from weeks to hours and ensured consistent quality.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="blogs">
+            <h3 class="section-title">Blog</h3>
+            <div class="blogs-container">
+                <div class="blog-card">
+                    <h4 class="blog-title">The Future of AI Product Management</h4>
+                    <p class="blog-excerpt">Exploring how the role of product managers is evolving with advances in artificial intelligence and machine learning...</p>
+                    <a href="https://medium.com" class="read-more">Read More</a>
+                </div>
+                <div class="blog-card">
+                    <h4 class="blog-title">Bridging the Gap Between Technical and Business Teams</h4>
+                    <p class="blog-excerpt">Strategies for effective communication between data scientists, engineers, and business stakeholders...</p>
+                    <a href="https://medium.com" class="read-more">Read More</a>
+                </div>
+                <div class="blog-card">
+                    <h4 class="blog-title">Ethical Considerations in AI Product Development</h4>
+                    <p class="blog-excerpt">How to build responsible AI products that prioritize fairness, transparency, and user privacy...</p>
+                    <a href="https://medium.com" class="read-more">Read More</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <h3 class="contact-title">Get in Touch</h3>
+            <div class="social-links">
+                <a href="mailto:vijay@example.com" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
+                <a href="https://linkedin.com" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="https://twitter.com" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Neural Network Visualization
+        const container = document.getElementById('neural-net-container');
+        
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 0);
+        container.appendChild(renderer.domElement);
+        
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
+        
+        // Neural network parameters
+        const nodeCount = 100;
+        const nodes = [];
+        const edges = [];
+        const nodeGroup = new THREE.Group();
+        
+        // Create nodes (neurons)
+        for (let i = 0; i < nodeCount; i++) {
+            const geometry = new THREE.SphereGeometry(0.1, 32, 32);
+            const material = new THREE.MeshPhongMaterial({
+                color: new THREE.Color(`hsl(${Math.random() * 360}, 100%, 50%)`),
+                emissive: 0x222222,
+                shininess: 100
+            });
+            
+            const node = new THREE.Mesh(geometry, material);
+            node.position.set(
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 10
+            );
+            
+            nodes.push(node);
+            nodeGroup.add(node);
+        }
+        
+        // Create edges (synapses)
+        for (let i = 0; i < nodeCount; i++) {
+            for (let j = i + 1; j < nodeCount; j++) {
+                if (Math.random() > 0.95) { // Sparse connections
+                    const material = new THREE.LineBasicMaterial({
+                        color: new THREE.Color(`hsl(${Math.random() * 360}, 80%, 60%)`),
+                        transparent: true,
+                        opacity: 0.3
+                    });
+                    
+                    const points = [
+                        nodes[i].position,
+                        nodes[j].position
+                    ];
+                    
+                    const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                    const edge = new THREE.Line(geometry, material);
+                    edges.push(edge);
+                    nodeGroup.add(edge);
+                }
+            }
+        }
+        
+        scene.add(nodeGroup);
+        camera.position.z = 15;
+        
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Rotate the network
+            nodeGroup.rotation.x += 0.005;
+            nodeGroup.rotation.y += 0.005;
+            
+            // Pulse nodes
+            nodes.forEach((node, index) => {
+                const hue = (Date.now() * 0.001 + index * 0.1) % 360;
+                node.material.color.setHSL(hue / 360, 1, 0.5);
+            });
+            
+            // Pulse edges
+            edges.forEach(edge => {
+                edge.material.opacity = 0.2 + Math.sin(Date.now() * 0.002) * 0.1;
+            });
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Project hover effect (additional JS support for the CSS transitions)
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const description = card.querySelector('.project-description');
+                description.style.height = description.scrollHeight + 'px';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const description = card.querySelector('.project-description');
+                description.style.height = '0';
+            });
+        });
+    </script>
+</body>
+</html>
