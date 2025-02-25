@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vijay Ramesh - AI Product Manager Portfolio</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Unbounded:wght@300;400;600&display=swap');
         
         * {
             margin: 0;
@@ -14,9 +14,9 @@
         }
         
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000;
-            color: #fff;
+            font-family: 'Space Mono', monospace;
+            background-color: #fff;
+            color: #000;
             line-height: 1.6;
         }
         
@@ -27,7 +27,7 @@
         }
         
         header {
-            height: 100vh;
+            height: 120vh; /* Made taller to accommodate larger animation */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -37,27 +37,29 @@
         }
         
         h1 {
-            font-size: 3rem;
-            font-weight: 300;
+            font-family: 'Unbounded', cursive;
+            font-size: 3.5rem;
+            font-weight: 600;
             letter-spacing: -0.05em;
             margin-bottom: 1rem;
             z-index: 2;
         }
         
         h2 {
+            font-family: 'Unbounded', cursive;
             font-size: 1.5rem;
             font-weight: 300;
             margin-bottom: 1rem;
-            color: #aaa;
+            color: #555;
             z-index: 2;
         }
         
         .quirky-intro {
             max-width: 600px;
             font-size: 1.1rem;
-            font-weight: 300;
+            font-weight: 400;
             margin-bottom: 3rem;
-            color: #ddd;
+            color: #222;
             z-index: 2;
             font-style: italic;
         }
@@ -76,6 +78,7 @@
         }
         
         .section-title {
+            font-family: 'Unbounded', cursive;
             font-size: 2rem;
             font-weight: 300;
             margin-bottom: 3rem;
@@ -89,16 +92,19 @@
         }
         
         .project-card {
-            border: 1px solid #333;
+            border: 1px solid #ccc;
             padding: 1.5rem;
             transition: all 0.3s ease;
+            background-color: #f8f8f8;
         }
         
         .project-card:hover {
-            border-color: #fff;
+            border-color: #000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .project-title {
+            font-family: 'Unbounded', cursive;
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
@@ -108,7 +114,7 @@
             height: 0;
             overflow: hidden;
             transition: height 0.3s ease;
-            color: #aaa;
+            color: #555;
         }
         
         .project-card:hover .project-description {
@@ -122,40 +128,44 @@
         }
         
         .blog-card {
-            border: 1px solid #333;
+            border: 1px solid #ccc;
             padding: 1.5rem;
+            background-color: #f8f8f8;
         }
         
         .blog-title {
+            font-family: 'Unbounded', cursive;
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
         
         .blog-excerpt {
-            color: #aaa;
+            color: #555;
             margin-bottom: 1rem;
         }
         
         .read-more {
-            color: #fff;
+            color: #000;
             text-decoration: none;
-            border-bottom: 1px solid #fff;
+            border-bottom: 1px solid #000;
             padding-bottom: 0.1rem;
             transition: all 0.3s ease;
         }
         
         .read-more:hover {
-            border-color: #aaa;
+            border-color: #555;
+            color: #555;
         }
         
         footer {
             padding: 4rem 0;
             text-align: center;
-            border-top: 1px solid #333;
+            border-top: 1px solid #ccc;
         }
         
         .contact-title {
+            font-family: 'Unbounded', cursive;
             font-size: 1.5rem;
             font-weight: 300;
             margin-bottom: 2rem;
@@ -168,13 +178,13 @@
         }
         
         .social-link {
-            color: #fff;
+            color: #000;
             font-size: 1.5rem;
             transition: all 0.3s ease;
         }
         
         .social-link:hover {
-            color: #aaa;
+            color: #555;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -278,37 +288,37 @@
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x000000, 0);
+        renderer.setClearColor(0xffffff, 0.1); // Slightly visible white background
         container.appendChild(renderer.domElement);
         
         // Lighting
         const ambientLight = new THREE.AmbientLight(0x404040);
         scene.add(ambientLight);
         
-        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        const pointLight = new THREE.PointLight(0x000000, 1, 100);
         pointLight.position.set(10, 10, 10);
         scene.add(pointLight);
         
         // Neural network parameters
-        const nodeCount = 100;
+        const nodeCount = 150; // Increased node count
         const nodes = [];
         const edges = [];
         const nodeGroup = new THREE.Group();
         
         // Create nodes (neurons)
         for (let i = 0; i < nodeCount; i++) {
-            const geometry = new THREE.SphereGeometry(0.1, 32, 32);
+            const geometry = new THREE.SphereGeometry(0.15, 32, 32); // Larger nodes
             const material = new THREE.MeshPhongMaterial({
-                color: new THREE.Color(`hsl(${Math.random() * 360}, 100%, 50%)`),
+                color: new THREE.Color(`hsl(${Math.random() * 360}, 80%, 30%)`), // Darker colors
                 emissive: 0x222222,
                 shininess: 100
             });
             
             const node = new THREE.Mesh(geometry, material);
             node.position.set(
-                (Math.random() - 0.5) * 10,
-                (Math.random() - 0.5) * 10,
-                (Math.random() - 0.5) * 10
+                (Math.random() - 0.5) * 15, // Wider spread
+                (Math.random() - 0.5) * 15,
+                (Math.random() - 0.5) * 15
             );
             
             nodes.push(node);
@@ -318,11 +328,11 @@
         // Create edges (synapses)
         for (let i = 0; i < nodeCount; i++) {
             for (let j = i + 1; j < nodeCount; j++) {
-                if (Math.random() > 0.95) { // Sparse connections
+                if (Math.random() > 0.93) { // More connections
                     const material = new THREE.LineBasicMaterial({
-                        color: new THREE.Color(`hsl(${Math.random() * 360}, 80%, 60%)`),
+                        color: new THREE.Color(`hsl(${Math.random() * 360}, 70%, 30%)`), // Darker colors
                         transparent: true,
-                        opacity: 0.3
+                        opacity: 0.4
                     });
                     
                     const points = [
@@ -339,25 +349,25 @@
         }
         
         scene.add(nodeGroup);
-        camera.position.z = 15;
+        camera.position.z = 20; // Camera positioned further back to see more of the network
         
         // Animation
         function animate() {
             requestAnimationFrame(animate);
             
             // Rotate the network
-            nodeGroup.rotation.x += 0.005;
-            nodeGroup.rotation.y += 0.005;
+            nodeGroup.rotation.x += 0.003;
+            nodeGroup.rotation.y += 0.003;
             
             // Pulse nodes
             nodes.forEach((node, index) => {
                 const hue = (Date.now() * 0.001 + index * 0.1) % 360;
-                node.material.color.setHSL(hue / 360, 1, 0.5);
+                node.material.color.setHSL(hue / 360, 0.8, 0.3); // Darker color palette
             });
             
             // Pulse edges
             edges.forEach(edge => {
-                edge.material.opacity = 0.2 + Math.sin(Date.now() * 0.002) * 0.1;
+                edge.material.opacity = 0.2 + Math.sin(Date.now() * 0.002) * 0.2; // More pronounced pulsing
             });
             
             renderer.render(scene, camera);
