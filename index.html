@@ -186,6 +186,65 @@
         .social-link:hover {
             color: #555;
         }
+        
+        /* Digital Art Section Styles */
+        .digital-art-section {
+            position: relative;
+            background-color: #f2f2f2;
+            padding: 4rem 0;
+            text-align: center;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        
+        .digital-art-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .digital-art-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .digital-art-title {
+            font-family: 'Unbounded', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #FF5F6D, #FFC371);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .digital-art-description {
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            font-size: 1.1rem;
+        }
+        
+        .digital-art-link {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, #FF5F6D, #FFC371);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 95, 109, 0.3);
+        }
+        
+        .digital-art-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(255, 95, 109, 0.4);
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 </head>
@@ -237,6 +296,21 @@
                         <p>Designed and implemented a comprehensive MLOps pipeline that reduced model deployment time from weeks to hours and ensured consistent quality.</p>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- New Digital Art Section -->
+        <section id="digital-art" class="digital-art-section">
+            <div class="digital-art-canvas" id="digital-art-canvas"></div>
+            <div class="digital-art-content">
+                <h3 class="digital-art-title">Digital Art Gallery</h3>
+                <p class="digital-art-description">
+                    Explore my collection of AI-generated artwork and digital creations. 
+                    From algorithmic compositions to neural style transfers, dive into a world where 
+                    technology meets creativity. Each piece represents the beautiful intersection of 
+                    artificial intelligence and artistic expression.
+                </p>
+                <a href="digital-art.html" class="digital-art-link">Explore Gallery</a>
             </div>
         </section>
         
@@ -393,6 +467,120 @@
                 const description = card.querySelector('.project-description');
                 description.style.height = '0';
             });
+        });
+
+        // Digital Art Canvas Animation
+        const artCanvas = document.getElementById('digital-art-canvas');
+        
+        // Create Digital Art Animation
+        const artScene = new THREE.Scene();
+        const artCamera = new THREE.PerspectiveCamera(75, artCanvas.clientWidth / artCanvas.clientHeight, 0.1, 1000);
+        const artRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        artRenderer.setSize(artCanvas.clientWidth, artCanvas.clientHeight);
+        artCanvas.appendChild(artRenderer.domElement);
+        
+        // Create gradient background
+        const gradientGeometry = new THREE.PlaneGeometry(50, 50);
+        const gradientMaterial = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: 0 }
+            },
+            vertexShader: `
+                varying vec2 vUv;
+                void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform float time;
+                varying vec2 vUv;
+                
+                void main() {
+                    vec2 uv = vUv;
+                    
+                    // Gradient colors
+                    vec3 color1 = vec3(1.0, 0.37, 0.43); // #FF5F6D
+                    vec3 color2 = vec3(1.0, 0.76, 0.44); // #FFC371
+                    
+                    // Moving gradient with time
+                    float mixValue = sin(uv.x * 3.14159 + time * 0.5) * 0.5 + 0.5;
+                    vec3 color = mix(color1, color2, mixValue);
+                    
+                    // Add some interest with a circular pattern
+                    float dist = length(uv - vec2(0.5, 0.5));
+                    float circle = smoothstep(0.3, 0.29, dist + sin(time * 0.5) * 0.1);
+                    color = mix(color, vec3(1.0), circle * 0.2);
+                    
+                    gl_FragColor = vec4(color, 0.7);
+                }
+            `,
+            transparent: true
+        });
+        
+        const gradientPlane = new THREE.Mesh(gradientGeometry, gradientMaterial);
+        gradientPlane.position.z = -10;
+        artScene.add(gradientPlane);
+        
+        // Create floating particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 100;
+        const particlesPositions = new Float32Array(particlesCount * 3);
+        const particlesSizes = new Float32Array(particlesCount);
+        
+        for (let i = 0; i < particlesCount; i++) {
+            particlesPositions[i * 3] = (Math.random() - 0.5) * 20;
+            particlesPositions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+            particlesPositions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+            particlesSizes[i] = Math.random() * 5;
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlesPositions, 3));
+        particlesGeometry.setAttribute('size', new THREE.BufferAttribute(particlesSizes, 1));
+        
+        const particlesMaterial = new THREE.PointsMaterial({
+            color: 0xffffff,
+            size: 0.5,
+            transparent: true,
+            opacity: 0.7,
+            sizeAttenuation: true
+        });
+        
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        artScene.add(particles);
+        
+        // Position camera
+        artCamera.position.z = 5;
+        
+        // Animation loop for digital art
+        function animateArt() {
+            requestAnimationFrame(animateArt);
+            
+            // Update time for shader
+            gradientMaterial.uniforms.time.value += 0.01;
+            
+            // Move particles
+            for (let i = 0; i < particlesCount; i++) {
+                particlesGeometry.attributes.position.array[i * 3 + 1] += Math.sin(Date.now() * 0.001 + i) * 0.01;
+                particlesGeometry.attributes.position.array[i * 3] += Math.cos(Date.now() * 0.001 + i) * 0.01;
+            }
+            particlesGeometry.attributes.position.needsUpdate = true;
+            
+            // Rotate particles
+            particles.rotation.y += 0.002;
+            particles.rotation.x += 0.001;
+            
+            artRenderer.render(artScene, artCamera);
+        }
+        
+        animateArt();
+        
+        // Handle resize for art canvas
+        window.addEventListener('resize', () => {
+            const artContainer = document.querySelector('.digital-art-section');
+            artCamera.aspect = artContainer.clientWidth / artContainer.clientHeight;
+            artCamera.updateProjectionMatrix();
+            artRenderer.setSize(artContainer.clientWidth, artContainer.clientHeight);
         });
     </script>
 </body>
