@@ -24,203 +24,278 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
-        /* Header Section - Based on Reference */
+        /* Unique Header Design */
         .header {
-            background: #000;
-            border: 3px solid #ffff00;
-            border-radius: 0;
-            padding: 40px;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            border: 3px solid #00ff41;
+            border-radius: 15px;
+            padding: 50px;
             text-align: center;
-            margin-bottom: 0;
+            margin-bottom: 40px;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,255,65,0.2);
+        }
+        
+        .terminal-prompt {
+            color: #00ff41;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-align: left;
+            background: rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
         }
         
         .header-title {
             color: #ffffff;
-            font-size: 1.2rem;
-            font-weight: 400;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(0,255,65,0.5);
+        }
+        
+        .header-subtitle {
+            color: #00ff41;
+            font-size: 1.1rem;
             margin-bottom: 30px;
-            letter-spacing: 0.1em;
         }
         
-        .header-content {
+        /* Original AI/ML ASCII Art */
+        .ai-visual {
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
             align-items: center;
-            gap: 60px;
-            margin-bottom: 40px;
+            margin: 30px 0;
+            color: #00ff41;
+            font-size: 0.8rem;
         }
         
-        .ascii-art {
-            color: #00ff00;
-            font-size: 0.7rem;
-            line-height: 1;
+        .ascii-section {
+            text-align: center;
             white-space: pre;
-            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.2;
         }
         
-        /* Persistent Navigation - Same as index.html */
+        /* Custom Navigation */
         .nav {
             display: flex;
-            gap: 0;
+            gap: 15px;
             justify-content: center;
-            background: #000;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-            border: 2px solid #ffff00;
+            margin-bottom: 40px;
+            padding: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
         }
         
         .nav-link {
-            background: #ffff00;
+            background: linear-gradient(135deg, #00ff41, #00cc33);
             color: #000;
             border: none;
-            padding: 8px 16px;
+            padding: 12px 25px;
             text-decoration: none;
             font-family: 'JetBrains Mono', monospace;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            border-radius: 20px;
             transition: all 0.3s ease;
-            border-right: 2px solid #000;
-        }
-        
-        .nav-link:last-child {
-            border-right: none;
+            box-shadow: 0 4px 15px rgba(0,255,65,0.3);
         }
         
         .nav-link.active {
-            background: #000;
-            color: #ffff00;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            box-shadow: 0 6px 20px rgba(255,255,255,0.4);
+            transform: translateY(-2px);
         }
         
         .nav-link:not(.active):hover {
-            background: #fff;
-            transform: translateY(-1px);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,255,65,0.5);
         }
         
-        /* Content Section */
+        /* Unique Content Layout */
         .content {
-            background: #ffffff;
-            border: 2px solid #000;
+            display: grid;
+            gap: 30px;
+            grid-template-columns: 1fr 2fr;
+            background: rgba(255,255,255,0.95);
+            border: 2px solid #00ff41;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .sidebar {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 40px 30px;
+            border-right: 2px solid #00ff41;
+        }
+        
+        .main-content {
             padding: 40px;
-            color: #000;
+            color: #333;
         }
         
-        .greeting {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #000;
-        }
-        
-        .separator {
-            border: none;
-            border-top: 3px dotted #000;
-            margin: 20px 0 30px 0;
-            width: 100%;
-        }
-        
-        .bio-section {
+        .profile-section {
+            text-align: center;
             margin-bottom: 30px;
         }
         
-        .bio-title {
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .quick-facts {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quick-facts li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ccc;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        
+        .fact-label {
+            color: #666;
             font-weight: 600;
-            margin-bottom: 15px;
+        }
+        
+        .fact-value {
             color: #000;
         }
         
+        .content-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .content-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            border-radius: 2px;
+        }
+        
         .bio-text {
-            color: #333;
-            line-height: 1.7;
-            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .section-divider {
+            display: flex;
+            align-items: center;
+            margin: 40px 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            margin: 0 15px;
         }
         
         /* Responsive Design */
         @media (max-width: 768px) {
-            body {
-                padding: 20px 10px;
-            }
-            
-            .header {
-                padding: 30px 20px;
-            }
-            
-            .header-title {
-                font-size: 1rem;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .ascii-art {
-                font-size: 0.6rem;
-            }
-            
             .content {
-                padding: 30px 20px;
+                grid-template-columns: 1fr;
             }
             
-            .greeting {
-                font-size: 1.5rem;
+            .sidebar {
+                border-right: none;
+                border-bottom: 2px solid #00ff41;
+            }
+            
+            .ai-visual {
+                flex-direction: column;
+                gap: 20px;
             }
             
             .nav {
                 flex-direction: column;
-                width: 100%;
-            }
-            
-            .nav-link {
-                border-right: none;
-                border-bottom: 2px solid #000;
-                padding: 10px 20px;
-            }
-            
-            .nav-link:last-child {
-                border-bottom: none;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .greeting {
-                font-size: 1.3rem;
+                align-items: center;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header Section -->
+        <!-- Original Header Design -->
         <header class="header">
-            <div class="header-title">the best ai pm you'll never meet</div>
+            <div class="terminal-prompt">vijay@ai-product-manager:~$ cat about.md</div>
+            <h1 class="header-title">AI Product Manager</h1>
+            <div class="header-subtitle">Bridging the gap between artificial intelligence and real-world impact</div>
             
-            <div class="header-content">
-                <div class="ascii-art">     ┌─────────┐
-     │ NEURAL  │
-     │ NETWORK │
-     └────┬────┘
-          │
-    ┌─────▼─────┐
-    │    AI     │
-    │  PRODUCT  │
-    │  MANAGER  │
-    └───────────┘</div>
+            <div class="ai-visual">
+                <div class="ascii-section">   ╔══════╗
+   ║ DATA ║
+   ╚══╤═══╝
+      │
+  ╔═══╦═══╗
+  ║ MODEL ║
+  ╚═══╤═══╝
+      │
+  ╔═══╦════╗
+  ║PRODUCT║
+  ╚════════╝</div>
                 
-                <div class="ascii-art">      ┌───┐
-      │ ☕ │
-      │   │
-      └─┬─┘
-        │
-    ┌───▼───┐
-    │ COFFEE│
-    │ POWERED│
-    └───────┘</div>
+                <div class="ascii-section">    ⚡ PIPELINE ⚡
+      │
+  ┌───╦───┐
+  │ TRAIN │ → 🤖
+  └───┬───┘
+      │
+  ┌───╦───┐
+  │ DEPLOY│ → 🚀
+  └───────┘</div>
+                
+                <div class="ascii-section">📀 METRICS 📀
+      │
+  ┌───╦───┐
+  │MONITOR│ → 📈
+  └───┬───┘
+      │
+  ┌───╦───┐
+  │IMPROVE│ → 🔄
+  └───────┘</div>
             </div>
             
             <nav class="nav">
@@ -230,40 +305,71 @@
             </nav>
         </header>
 
-        <!-- Content Section -->
+        <!-- Original Content Layout -->
         <div class="content">
-            <h1 class="greeting">hi, i'm vijay.</h1>
-            <hr class="separator">
+            <div class="sidebar">
+                <div class="profile-section">
+                    <div class="profile-avatar">VR</div>
+                    <h3>Vijay Ramesh</h3>
+                </div>
+                
+                <ul class="quick-facts">
+                    <li>
+                        <span class="fact-label">Role</span>
+                        <span class="fact-value">AI Product Manager</span>
+                    </li>
+                    <li>
+                        <span class="fact-label">Focus</span>
+                        <span class="fact-value">ML/AI Products</span>
+                    </li>
+                    <li>
+                        <span class="fact-label">Experience</span>
+                        <span class="fact-value">5+ Years</span>
+                    </li>
+                    <li>
+                        <span class="fact-label">Specialty</span>
+                        <span class="fact-value">Product Strategy</span>
+                    </li>
+                    <li>
+                        <span class="fact-label">Industries</span>
+                        <span class="fact-value">Tech, AI/ML</span>
+                    </li>
+                    <li>
+                        <span class="fact-label">Location</span>
+                        <span class="fact-value">Remote</span>
+                    </li>
+                </ul>
+            </div>
             
-            <div class="bio-section">
-                <p class="bio-title">some things about me ~</p>
+            <div class="main-content">
+                <h2 class="content-title">About Me</h2>
                 
                 <p class="bio-text">
-                    i'm an ai product manager with a passion for building products that actually work (revolutionary concept, i know). spent the last few years navigating the wild west of ai/ml products, translating between "the model needs more data" and "why isn't this feature shipped yet?"
+                    I'm Vijay, an AI Product Manager passionate about turning cutting-edge machine learning research into products that solve real problems. My journey began in traditional software engineering, but I found my calling at the intersection of <span class="highlight">artificial intelligence</span> and <span class="highlight">product strategy</span>.
                 </p>
                 
                 <p class="bio-text">
-                    before diving into the ai rabbit hole, i cut my teeth in traditional product management and engineering. turns out, managing ai products is like regular product management, except the features sometimes hallucinate and your success metrics include "did the model suggest anything embarrassing today?"
+                    What excites me most is the challenge of making AI accessible and useful. Whether it's designing user experiences for complex ML systems or working with data scientists to productionize models, I thrive on building bridges between technical possibilities and user needs.
+                </p>
+                
+                <div class="section-divider">Current Focus</div>
+                
+                <p class="bio-text">
+                    Currently, I'm focused on developing AI-powered features that enhance user productivity without overwhelming them with complexity. My approach combines deep technical understanding with user-centered design principles to create products that feel intuitive, even when powered by sophisticated algorithms.
                 </p>
                 
                 <p class="bio-text">
-                    when i'm not explaining to stakeholders why our chatbot can't read minds or attending the 47th meeting about model ethics this quarter, i enjoy exploring new coffee shops (fuel for surviving those all-hands where someone inevitably asks "but can we make it more like chatgpt?").
+                    I believe the future of AI products lies not in replacing human intelligence, but in augmenting it. This philosophy guides everything I build – from recommendation systems that learn user preferences to natural language interfaces that make complex data accessible to everyone.
+                </p>
+                
+                <div class="section-divider">Beyond Work</div>
+                
+                <p class="bio-text">
+                    When I'm not diving deep into model performance metrics or user feedback, you'll find me exploring the latest developments in AI research, experimenting with new tools, or sharing insights about the evolving landscape of AI product management through writing and speaking.
                 </p>
                 
                 <p class="bio-text">
-                    i also spend time reading about emerging ai trends, experimenting with new tools, and occasionally writing about the bizarre reality of being an ai pm in 2025. spoiler alert: it's equal parts exciting and terrifying.
-                </p>
-                
-                <p class="bio-text">
-                    this space serves as my digital garden for longer-form thoughts on ai product management, team dynamics, and the occasional existential crisis about whether we're building the future or just really expensive autocomplete.
-                </p>
-                
-                <p class="bio-text">
-                    twitter/x is where i share hot takes and engage with the ai community (mostly arguing about whether agi is 2 years away or 20). for more professional networking and career updates, you can find me on linkedin.
-                </p>
-                
-                <p class="bio-text">
-                    the easiest way to reach me is through dm's on any platform - i actually check them regularly. just please don't pitch me your "revolutionary ai startup that's going to change everything" unless it actually solves a real problem. we have enough chatbots, thanks.
+                    I'm always interested in connecting with fellow product managers, AI researchers, and anyone passionate about the responsible development of artificial intelligence. Feel free to reach out through any of the channels listed on my main page.
                 </p>
             </div>
         </div>
