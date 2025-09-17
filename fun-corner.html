@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Vijay Ramesh</title>
-    <meta name="description" content="About Vijay Ramesh - AI Product Manager">
+    <title>Fun Corner - Vijay Ramesh</title>
+    <meta name="description" content="Fun Corner - Creative content and cartoons by Vijay Ramesh">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
@@ -28,7 +28,7 @@
             margin: 0 auto;
         }
         
-        /* Header Section - Based on Reference */
+        /* Header Section */
         .header {
             background: #000;
             border: 3px solid #ffff00;
@@ -63,7 +63,7 @@
             font-family: 'JetBrains Mono', monospace;
         }
         
-        /* Persistent Navigation - Same as index.html */
+        /* Persistent Navigation */
         .nav {
             display: flex;
             gap: 0;
@@ -108,9 +108,10 @@
             border: 2px solid #000;
             padding: 40px;
             color: #000;
+            text-align: center;
         }
         
-        .greeting {
+        .fun-title {
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 20px;
@@ -124,20 +125,68 @@
             width: 100%;
         }
         
-        .bio-section {
+        .coming-soon {
+            background: #d1ecf1;
+            border: 2px solid #bee5eb;
+            padding: 40px;
+            border-radius: 8px;
+            color: #0c5460;
             margin-bottom: 30px;
         }
         
-        .bio-title {
-            font-weight: 600;
+        .coming-soon h3 {
+            font-size: 1.4rem;
             margin-bottom: 15px;
-            color: #000;
         }
         
-        .bio-text {
-            color: #333;
-            line-height: 1.7;
-            margin-bottom: 20px;
+        .cartoon-placeholder {
+            background: #ffffff;
+            border: 2px dashed #17a2b8;
+            padding: 60px 25px;
+            border-radius: 8px;
+            color: #138496;
+            font-style: italic;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            transition: all 0.3s ease;
+        }
+        
+        .cartoon-placeholder:hover {
+            background: #f8f9fa;
+            border-color: #20c997;
+            transform: scale(1.02);
+        }
+        
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .preview-card {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            color: #856404;
+            font-style: italic;
+            transition: all 0.3s ease;
+        }
+        
+        .preview-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-style: solid;
+        }
+        
+        .preview-card h4 {
+            color: #495057;
+            margin-bottom: 10px;
+            font-style: normal;
         }
         
         /* Responsive Design */
@@ -167,7 +216,7 @@
                 padding: 30px 20px;
             }
             
-            .greeting {
+            .fun-title {
                 font-size: 1.5rem;
             }
             
@@ -185,10 +234,14 @@
             .nav-link:last-child {
                 border-bottom: none;
             }
+            
+            .preview-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 480px) {
-            .greeting {
+            .fun-title {
                 font-size: 1.3rem;
             }
         }
@@ -198,73 +251,71 @@
     <div class="container">
         <!-- Header Section -->
         <header class="header">
-            <div class="header-title">the best ai pm you'll never meet</div>
+            <div class="header-title">where creativity meets ai product chaos</div>
             
             <div class="header-content">
-                <div class="ascii-art">     ┌─────────┐
-     │ NEURAL  │
-     │ NETWORK │
-     └────┬────┘
-          │
-    ┌─────▼─────┐
-    │    AI     │
-    │  PRODUCT  │
-    │  MANAGER  │
-    └───────────┘</div>
+                <div class="ascii-art">    ┌────────┐
+    │  🎨    │
+    │ CREATIVE │
+    │  CORNER  │
+    └────┬───┘
+         │
+    ┌────▼────┐
+    │   FUN    │
+    │  STUFF   │
+    └─────────┘</div>
                 
-                <div class="ascii-art">      ┌───┐
-      │ ☕ │
-      │   │
-      └─┬─┘
-        │
-    ┌───▼───┐
-    │ COFFEE│
-    │ POWERED│
-    └───────┘</div>
+                <div class="ascii-art">  ┌─────────┐
+  │ 🤖 + 📚 │
+  │  COMICS  │
+  │ & MEMES  │
+  └────┬────┘
+       │
+  ┌────▼────┐
+  │ COMING  │
+  │  SOON   │
+  └─────────┘</div>
             </div>
             
             <nav class="nav">
                 <a href="index.html" class="nav-link">blog</a>
-                <a href="about.html" class="nav-link active">about</a>
-                <a href="fun-corner.html" class="nav-link">fun corner</a>
+                <a href="about.html" class="nav-link">about</a>
+                <a href="fun-corner.html" class="nav-link active">fun corner</a>
             </nav>
         </header>
 
         <!-- Content Section -->
         <div class="content">
-            <h1 class="greeting">hi, i'm vijay.</h1>
+            <h1 class="fun-title">welcome to the fun corner!</h1>
             <hr class="separator">
             
-            <div class="bio-section">
-                <p class="bio-title">some things about me ~</p>
+            <div class="coming-soon">
+                <h3>Cartoon Series & Creative Content Coming Soon</h3>
+                <p>A space for creative content, comics, and fun visual stories about ai product management, tech life, and the absurdities of working in ai.</p>
                 
-                <p class="bio-text">
-                    i'm an ai product manager with a passion for building products that actually work (revolutionary concept, i know). spent the last few years navigating the wild west of ai/ml products, translating between "the model needs more data" and "why isn't this feature shipped yet?"
-                </p>
+                <div class="preview-grid">
+                    <div class="preview-card">
+                        <h4>"AI PM Adventures"</h4>
+                        <p>Weekly comic strips about the daily chaos of managing AI products...</p>
+                    </div>
+                    <div class="preview-card">
+                        <h4>"Model Meltdowns"</h4>
+                        <p>Illustrated stories of when AI models go hilariously wrong...</p>
+                    </div>
+                    <div class="preview-card">
+                        <h4>"Stakeholder Shenanigans"</h4>
+                        <p>Comics about the most bizarre feature requests from executives...</p>
+                    </div>
+                </div>
                 
-                <p class="bio-text">
-                    before diving into the ai rabbit hole, i cut my teeth in traditional product management and engineering. turns out, managing ai products is like regular product management, except the features sometimes hallucinate and your success metrics include "did the model suggest anything embarrassing today?"
-                </p>
-                
-                <p class="bio-text">
-                    when i'm not explaining to stakeholders why our chatbot can't read minds or attending the 47th meeting about model ethics this quarter, i enjoy exploring new coffee shops (fuel for surviving those all-hands where someone inevitably asks "but can we make it more like chatgpt?").
-                </p>
-                
-                <p class="bio-text">
-                    i also spend time reading about emerging ai trends, experimenting with new tools, and occasionally writing about the bizarre reality of being an ai pm in 2025. spoiler alert: it's equal parts exciting and terrifying.
-                </p>
-                
-                <p class="bio-text">
-                    this space serves as my digital garden for longer-form thoughts on ai product management, team dynamics, and the occasional existential crisis about whether we're building the future or just really expensive autocomplete.
-                </p>
-                
-                <p class="bio-text">
-                    twitter/x is where i share hot takes and engage with the ai community (mostly arguing about whether agi is 2 years away or 20). for more professional networking and career updates, you can find me on linkedin.
-                </p>
-                
-                <p class="bio-text">
-                    the easiest way to reach me is through dm's on any platform - i actually check them regularly. just please don't pitch me your "revolutionary ai startup that's going to change everything" unless it actually solves a real problem. we have enough chatbots, thanks.
-                </p>
+                <div class="cartoon-placeholder">
+                    <div style="text-align: center;">
+                        <p style="font-size: 3rem; margin-bottom: 10px;">🎨🤖</p>
+                        <p style="font-size: 1.1rem; font-weight: 600;">Future home of creative cartoon series</p>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">Stay tuned for visual stories about the wild world of AI product management!</p>
+                        <p style="font-size: 0.8rem; margin-top: 15px; font-style: normal; color: #6c757d;">Subscribe to my newsletter or follow me on social media to get notified when the first comics drop!</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

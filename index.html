@@ -132,40 +132,46 @@
             animation: typing 3s steps(50) 3.5s both, blink 1s step-end infinite 6.5s;
         }
         
-        /* Navigation */
+        /* Navigation - Persistent across all pages */
         .nav {
             display: flex;
-            gap: 10px;
+            gap: 0;
             justify-content: center;
             margin-bottom: 30px;
-            flex-wrap: wrap;
+            background: #000;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid #ffff00;
         }
         
         .nav-button {
-            background: #000;
-            color: #ffff00;
-            border: 2px solid #ffff00;
+            background: #ffff00;
+            color: #000;
+            border: none;
             padding: 12px 24px;
             text-decoration: none;
             font-family: 'JetBrains Mono', monospace;
             font-weight: 600;
-            border-radius: 6px;
-            transition: all 0.3s ease;
             font-size: 1rem;
             cursor: pointer;
             display: inline-block;
+            transition: all 0.3s ease;
+            border-right: 2px solid #000;
         }
         
-        .nav-button:hover {
-            background: #ffff00;
-            color: #000;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        .nav-button:last-child {
+            border-right: none;
         }
         
         .nav-button.active {
-            background: #ffff00;
-            color: #000;
+            background: #000;
+            color: #ffff00;
+        }
+        
+        .nav-button:not(.active):hover {
+            background: #fff;
+            transform: translateY(-1px);
         }
         
         /* Main Content Area */
@@ -386,7 +392,16 @@
             
             .nav {
                 flex-direction: column;
-                align-items: center;
+                width: 100%;
+            }
+            
+            .nav-button {
+                border-right: none;
+                border-bottom: 2px solid #000;
+            }
+            
+            .nav-button:last-child {
+                border-bottom: none;
             }
             
             .contact-grid {
@@ -430,10 +445,11 @@
             <p class="terminal-text typing-2">vijay@ai-products:~$ building the future, one algorithm at a time</p>
         </header>
 
-        <!-- Navigation -->
+        <!-- Persistent Navigation across all pages -->
         <nav class="nav">
             <a href="index.html" class="nav-button active">blog</a>
             <a href="about.html" class="nav-button">about</a>
+            <a href="fun-corner.html" class="nav-button">fun corner</a>
         </nav>
 
         <!-- Main Content - Blog Posts Section -->
