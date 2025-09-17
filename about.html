@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Vijay Ramesh</title>
+    <meta name="description" content="About Vijay Ramesh - AI Product Manager">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, #00d4ff, #090979);
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Header Section - Based on Reference */
+        .header {
+            background: #000;
+            border: 3px solid #ffff00;
+            border-radius: 0;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 0;
+            position: relative;
+        }
+        
+        .header-title {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            letter-spacing: 0.1em;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        
+        .ascii-art {
+            color: #00ff00;
+            font-size: 0.7rem;
+            line-height: 1;
+            white-space: pre;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: 0;
+            justify-content: center;
+        }
+        
+        .nav-link {
+            background: #ffff00;
+            color: #000;
+            border: 2px solid #000;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+        
+        .nav-link.active {
+            background: #000;
+            color: #ffff00;
+            border-color: #ffff00;
+        }
+        
+        .nav-link:not(.active):hover {
+            background: #fff;
+            transform: translateY(-1px);
+        }
+        
+        /* Content Section */
+        .content {
+            background: #ffffff;
+            border: 2px solid #000;
+            padding: 40px;
+            color: #000;
+        }
+        
+        .greeting {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #000;
+        }
+        
+        .separator {
+            border: none;
+            border-top: 3px dotted #000;
+            margin: 20px 0 30px 0;
+            width: 100%;
+        }
+        
+        .bio-section {
+            margin-bottom: 30px;
+        }
+        
+        .bio-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .bio-text {
+            color: #333;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header-title {
+                font-size: 1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .ascii-art {
+                font-size: 0.6rem;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .greeting {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-nav {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .nav-link {
+                padding: 10px 20px;
+            }
+            
+            .greeting {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-title">the best ai pm you'll never meet</div>
+            
+            <div class="header-content">
+                <div class="ascii-art">     ┌─────────┐
+     │ NEURAL  │
+     │ NETWORK │
+     └────┬────┘
+          │
+    ┌─────▼─────┐
+    │    AI     │
+    │  PRODUCT  │
+    │  MANAGER  │
+    └───────────┘</div>
+                
+                <div class="ascii-art">      ┌───┐
+      │ ☕ │
+      │   │
+      └─┬─┘
+        │
+    ┌───▼───┐
+    │ COFFEE│
+    │ POWERED│
+    └───────┘</div>
+            </div>
+            
+            <nav class="header-nav">
+                <a href="index.html" class="nav-link">blog</a>
+                <a href="about.html" class="nav-link active">about</a>
+                <a href="index.html#fun-corner" class="nav-link">fun corner</a>
+            </nav>
+        </header>
+
+        <!-- Content Section -->
+        <div class="content">
+            <h1 class="greeting">hi, i'm vijay.</h1>
+            <hr class="separator">
+            
+            <div class="bio-section">
+                <p class="bio-title">some things about me ~</p>
+                
+                <p class="bio-text">
+                    i'm an ai product manager with a passion for building products that actually work (revolutionary concept, i know). spent the last few years navigating the wild west of ai/ml products, translating between "the model needs more data" and "why isn't this feature shipped yet?"
+                </p>
+                
+                <p class="bio-text">
+                    before diving into the ai rabbit hole, i cut my teeth in traditional product management and engineering. turns out, managing ai products is like regular product management, except the features sometimes hallucinate and your success metrics include "did the model suggest anything embarrassing today?"
+                </p>
+                
+                <p class="bio-text">
+                    when i'm not explaining to stakeholders why our chatbot can't read minds or attending the 47th meeting about model ethics this quarter, i enjoy exploring new coffee shops (fuel for surviving those all-hands where someone inevitably asks "but can we make it more like chatgpt?").
+                </p>
+                
+                <p class="bio-text">
+                    i also spend time reading about emerging ai trends, experimenting with new tools, and occasionally writing about the bizarre reality of being an ai pm in 2025. spoiler alert: it's equal parts exciting and terrifying.
+                </p>
+                
+                <p class="bio-text">
+                    this space serves as my digital garden for longer-form thoughts on ai product management, team dynamics, and the occasional existential crisis about whether we're building the future or just really expensive autocomplete.
+                </p>
+                
+                <p class="bio-text">
+                    twitter/x is where i share hot takes and engage with the ai community (mostly arguing about whether agi is 2 years away or 20). for more professional networking and career updates, you can find me on linkedin.
+                </p>
+                
+                <p class="bio-text">
+                    the easiest way to reach me is through dm's on any platform - i actually check them regularly. just please don't pitch me your "revolutionary ai startup that's going to change everything" unless it actually solves a real problem. we have enough chatbots, thanks.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
