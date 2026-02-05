@@ -237,6 +237,62 @@
         .frame-accent.top-left { top: -30px; left: -30px; }
         .frame-accent.bottom-right { bottom: -30px; right: -30px; }
 
+        /* Surrealist Watching Eye */
+        .surreal-eye {
+            position: fixed;
+            bottom: 80px;
+            left: 60px;
+            width: 60px;
+            height: 60px;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .eye-outer {
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--light-gray);
+            border-radius: 50% 0;
+            transform: rotate(-45deg);
+            position: relative;
+            overflow: hidden;
+            background: var(--white);
+        }
+
+        .eye-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 24px;
+            height: 24px;
+            background: var(--charcoal);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+        }
+
+        .eye-pupil {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: var(--red);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .eye-shine {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+        }
+
         /* Floating Rose Petals */
         .petal {
             position: absolute;
@@ -369,6 +425,22 @@
             border-color: var(--black);
         }
 
+        /* Magnetic button wrapper */
+        .magnetic-wrap {
+            display: inline-block;
+            position: relative;
+        }
+
+        /* Text scramble effect */
+        .scramble-text {
+            display: inline-block;
+        }
+
+        .scramble-text .char {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
         /* Scroll Poetry */
         .scroll-poetry {
             position: absolute;
@@ -471,14 +543,22 @@
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: translateY(50px);
             cursor: none;
-            transition: transform 0.6s ease, box-shadow 0.6s ease;
+            transition: box-shadow 0.6s ease;
+            transform-style: preserve-3d;
+            transform: perspective(1000px) translateY(50px);
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(196, 30, 58, 0.08);
+            box-shadow: 0 30px 60px rgba(196, 30, 58, 0.12);
+        }
+
+        .project-card .project-info {
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-info {
+            transform: translateZ(20px);
         }
 
         .project-visual {
@@ -941,6 +1021,16 @@
     <div class="side-text left">DREAMS INTO REALITY</div>
     <div class="side-text right">COMMERCE AS ART</div>
 
+    <!-- Surrealist Watching Eye (Dalí inspired) -->
+    <div class="surreal-eye">
+        <div class="eye-outer">
+            <div class="eye-inner">
+                <div class="eye-pupil"></div>
+                <div class="eye-shine"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Boot Sequence -->
     <div class="boot-sequence">
         <div class="boot-poem">
@@ -1257,7 +1347,12 @@
         const cursorRing = document.querySelector('.cursor-ring');
         const cursorDot = document.querySelector('.cursor-dot');
 
+        let mouseX = 0, mouseY = 0;
+
         document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
             anime({
                 targets: cursorRing,
                 left: e.clientX - 20,
@@ -1268,7 +1363,57 @@
 
             cursorDot.style.left = e.clientX - 4 + 'px';
             cursorDot.style.top = e.clientY - 4 + 'px';
+
+            // Parallax floating shapes
+            const shapes = document.querySelectorAll('.floating-shape');
+            shapes.forEach((shape, i) => {
+                const speed = (i + 1) * 0.02;
+                const x = (window.innerWidth / 2 - e.clientX) * speed;
+                const y = (window.innerHeight / 2 - e.clientY) * speed;
+                shape.style.transform = `translate(${x}px, ${y}px)`;
+            });
+
+            // Eye tracking
+            updateEye(e.clientX, e.clientY);
         });
+
+        // ============================================
+        // SURREALIST EYE - Follows cursor
+        // ============================================
+        const eyeInner = document.querySelector('.eye-inner');
+        const surrealEye = document.querySelector('.surreal-eye');
+
+        function updateEye(mx, my) {
+            if (!eyeInner || !surrealEye) return;
+
+            const eyeRect = surrealEye.getBoundingClientRect();
+            const eyeCenterX = eyeRect.left + eyeRect.width / 2;
+            const eyeCenterY = eyeRect.top + eyeRect.height / 2;
+
+            const angle = Math.atan2(my - eyeCenterY, mx - eyeCenterX);
+            const distance = Math.min(8, Math.hypot(mx - eyeCenterX, my - eyeCenterY) / 20);
+
+            const eyeX = Math.cos(angle) * distance;
+            const eyeY = Math.sin(angle) * distance;
+
+            eyeInner.style.transform = `translate(calc(-50% + ${eyeX}px), calc(-50% + ${eyeY}px))`;
+        }
+
+        // Eye blink animation
+        function blinkEye() {
+            if (!surrealEye) return;
+            anime({
+                targets: '.eye-outer',
+                scaleY: [1, 0.1, 1],
+                duration: 150,
+                easing: 'easeInOutQuad'
+            });
+        }
+
+        // Random blink
+        setInterval(() => {
+            if (Math.random() > 0.7) blinkEye();
+        }, 3000);
 
         document.querySelectorAll('a, button, .project-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
@@ -1350,6 +1495,14 @@
                 opacity: [0, 0.4],
                 duration: 1500
             });
+
+            // Fade in the surrealist eye
+            mainTL.add({
+                targets: '.surreal-eye',
+                opacity: [0, 0.6],
+                duration: 2000,
+                easing: 'easeOutQuad'
+            }, '-=1000');
 
             mainTL.add({
                 targets: '.logo',
@@ -1729,6 +1882,109 @@
                     });
                 }
             });
+        });
+
+        // ============================================
+        // 3D CARD TILT EFFECT
+        // ============================================
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+
+        // ============================================
+        // MAGNETIC BUTTONS
+        // ============================================
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // ============================================
+        // TEXT SCRAMBLE ON HOVER
+        // ============================================
+        class TextScramble {
+            constructor(el) {
+                this.el = el;
+                this.chars = '!<>-_\\/[]{}—=+*^?#________';
+                this.originalText = el.textContent;
+            }
+
+            scramble() {
+                const length = this.originalText.length;
+                let iterations = 0;
+                const maxIterations = length * 3;
+
+                const interval = setInterval(() => {
+                    this.el.textContent = this.originalText
+                        .split('')
+                        .map((char, i) => {
+                            if (i < iterations / 3) return this.originalText[i];
+                            return this.chars[Math.floor(Math.random() * this.chars.length)];
+                        })
+                        .join('');
+
+                    iterations++;
+                    if (iterations >= maxIterations) {
+                        clearInterval(interval);
+                        this.el.textContent = this.originalText;
+                    }
+                }, 30);
+            }
+        }
+
+        // Apply scramble to project names on hover
+        document.querySelectorAll('.project-name').forEach(name => {
+            const scrambler = new TextScramble(name);
+            name.addEventListener('mouseenter', () => scrambler.scramble());
+        });
+
+        // ============================================
+        // BREATHING ANIMATION FOR SYMBOLS
+        // ============================================
+        anime({
+            targets: '.manifesto-symbol, .footer-symbol, .divider-rose',
+            scale: [1, 1.1, 1],
+            opacity: [1, 0.8, 1],
+            duration: 3000,
+            easing: 'easeInOutSine',
+            loop: true
+        });
+
+        // ============================================
+        // EXPERTISE DOT PULSE
+        // ============================================
+        anime({
+            targets: '.expertise-dot',
+            scale: [1, 1.5, 1],
+            opacity: [1, 0.5, 1],
+            duration: 2000,
+            delay: anime.stagger(200),
+            easing: 'easeInOutSine',
+            loop: true
         });
     </script>
 </body>
