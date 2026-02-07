@@ -441,29 +441,29 @@
             transition: transform 0.3s ease;
         }
 
-        /* Scroll Poetry */
-        .scroll-poetry {
+        /* Section Transition Lines */
+        .work::before,
+        .manifesto::before,
+        .about::before {
+            content: '';
             position: absolute;
-            bottom: 60px;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
-            text-align: center;
-            opacity: 0;
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--red), transparent);
+            opacity: 0.3;
         }
 
-        .scroll-poetry p {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.9rem;
-            font-style: italic;
-            color: var(--gray);
-            margin-bottom: 15px;
+        /* Resume Nav Link */
+        .nav-links .resume-nav-link {
+            color: var(--red);
+            font-weight: 500;
         }
 
-        .scroll-line {
-            width: 1px;
-            height: 60px;
-            background: linear-gradient(to bottom, var(--red), transparent);
-            margin: 0 auto;
+        .nav-links .resume-nav-link:hover {
+            color: var(--black);
         }
 
         /* Side Text */
@@ -839,7 +839,7 @@
             padding: 150px 60px;
             position: relative;
             z-index: 10;
-            background: var(--white);
+            background: linear-gradient(180deg, var(--cream) 0%, var(--white) 40%);
             text-align: center;
         }
 
@@ -981,6 +981,306 @@
             opacity: 1;
         }
 
+        /* Rotating Text Animation */
+        .rotating-text {
+            display: inline-block;
+            min-width: 200px;
+        }
+
+        .rotating-text .char-animate {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        /* Nav Hide/Show on Scroll */
+        nav {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        nav.nav-hidden {
+            transform: translateY(-100%);
+        }
+
+        nav.nav-scrolled {
+            background: rgba(254, 254, 254, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Scroll Down Arrow */
+        .scroll-down-arrow {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            z-index: 20;
+            cursor: none;
+        }
+
+        .scroll-down-arrow span {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            color: var(--gray);
+            font-weight: 300;
+        }
+
+        .scroll-arrow-icon {
+            width: 20px;
+            height: 20px;
+            border-right: 1px solid var(--red);
+            border-bottom: 1px solid var(--red);
+            transform: rotate(45deg);
+            animation: scrollArrowBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollArrowBounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); opacity: 1; }
+            50% { transform: rotate(45deg) translateY(6px); opacity: 0.5; }
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--light-gray);
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 500;
+            cursor: none;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover {
+            background: var(--red);
+            border-color: var(--red);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(196, 30, 58, 0.2);
+        }
+
+        .back-to-top:hover .arrow-up {
+            border-color: var(--white);
+        }
+
+        .arrow-up {
+            width: 10px;
+            height: 10px;
+            border-left: 1.5px solid var(--charcoal);
+            border-top: 1.5px solid var(--charcoal);
+            transform: rotate(45deg);
+            margin-top: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        /* TESTIMONIALS SECTION */
+        .testimonials {
+            padding: 150px 60px;
+            position: relative;
+            z-index: 10;
+            background: var(--charcoal);
+            overflow: hidden;
+        }
+
+        .testimonials .section-header {
+            margin-bottom: 80px;
+        }
+
+        .testimonials .section-whisper {
+            color: var(--rose);
+        }
+
+        .testimonials .section-title {
+            color: var(--white);
+        }
+
+        .testimonials-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 280px;
+        }
+
+        .testimonial-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--white);
+            line-height: 2;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .testimonial-author {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--red-soft);
+            letter-spacing: 3px;
+            margin-bottom: 6px;
+        }
+
+        .testimonial-role {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 300;
+            color: var(--gray);
+            letter-spacing: 2px;
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 50px;
+        }
+
+        .testimonial-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gray);
+            cursor: none;
+            transition: all 0.4s ease;
+            border: none;
+            padding: 0;
+        }
+
+        .testimonial-dot.active {
+            background: var(--red);
+            transform: scale(1.3);
+        }
+
+        .testimonial-dot:hover {
+            background: var(--red-soft);
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .testimonial-nav button {
+            background: none;
+            border: 1px solid var(--gray);
+            color: var(--gray);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            transition: all 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-nav button:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        /* Resume Download Button */
+        .resume-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 400;
+            padding: 14px 32px;
+            border: 1px solid var(--red);
+            background: transparent;
+            color: var(--red);
+            cursor: none;
+            letter-spacing: 2px;
+            text-decoration: none;
+            margin-top: 30px;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .resume-btn:hover {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .resume-btn svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .resume-btn:hover svg {
+            transform: translateY(2px);
+        }
+
+        /* Modal Blue CTA */
+        .modal .btn-primary {
+            background: #2563EB;
+            border-color: #2563EB;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .modal .btn-primary:hover {
+            background: #1D4ED8;
+            border-color: #1D4ED8;
+        }
+
+        .modal-linkedin {
+            display: inline-block;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.75rem;
+            color: #2563EB;
+            text-decoration: none;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .modal-linkedin:hover {
+            color: var(--red);
+        }
+
         /* Responsive */
         @media (max-width: 1000px) {
             .projects-gallery { grid-template-columns: 1fr 1fr; }
@@ -992,13 +1292,17 @@
 
         @media (max-width: 600px) {
             .projects-gallery { grid-template-columns: 1fr; }
-            .work, .about, .manifesto { padding: 100px 30px; }
+            .work, .about, .manifesto, .testimonials { padding: 100px 30px; }
             .hero { padding: 0 30px; }
             .hero-cta { flex-direction: column; align-items: center; }
             nav { padding: 20px 30px; }
             .nav-links { display: none; }
             .impact-grid { grid-template-columns: 1fr; }
             .surreal-frame { width: 280px; height: 360px; }
+            .testimonial-quote { font-size: 1.2rem; }
+            .testimonials-carousel { min-height: 320px; }
+            .back-to-top { bottom: 20px; right: 20px; width: 44px; height: 44px; }
+            .footer-links { flex-direction: column; align-items: center; gap: 20px; }
         }
     </style>
 </head>
@@ -1049,6 +1353,8 @@
         <div class="nav-links">
             <a href="#work">GALLERY</a>
             <a href="#about">STORY</a>
+            <a href="#testimonials">VOICES</a>
+            <a href="#" class="resume-nav-link" onclick="return false;" download>RESUME ↓</a>
             <a href="#" onclick="openModal(); return false;">CONNECT</a>
         </div>
     </nav>
@@ -1082,7 +1388,7 @@
         <div class="hero-content">
             <p class="hero-whisper">where commerce meets dreams</p>
             <h1 class="hero-name">PINAZ PATEL</h1>
-            <p class="hero-title">ECOMMERCE VISIONARY</p>
+            <p class="hero-title"><span class="rotating-text"></span></p>
             <p class="hero-poetry">
                 "I don't build stores — I craft experiences<br>
                 where every click is a heartbeat,<br>
@@ -1095,10 +1401,10 @@
             </div>
         </div>
 
-        <!-- Scroll Poetry -->
-        <div class="scroll-poetry">
-            <p>descend into wonder</p>
-            <div class="scroll-line"></div>
+        <!-- Scroll Down Arrow -->
+        <div class="scroll-down-arrow" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">
+            <span>SCROLL</span>
+            <div class="scroll-arrow-icon"></div>
         </div>
     </section>
 
@@ -1217,6 +1523,10 @@
                 <div class="expertise">
                     <div class="expertise-item">
                         <div class="expertise-dot"></div>
+                        <span class="expertise-text">UX/UI Design & Product Strategy</span>
+                    </div>
+                    <div class="expertise-item">
+                        <div class="expertise-dot"></div>
                         <span class="expertise-text">Crafting marketplace ecosystems</span>
                     </div>
                     <div class="expertise-item">
@@ -1232,6 +1542,11 @@
                         <span class="expertise-text">Transforming browsers into believers</span>
                     </div>
                 </div>
+
+                <a href="#" class="resume-btn" download>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    DOWNLOAD RESUME
+                </a>
             </div>
         </div>
     </section>
@@ -1258,6 +1573,49 @@
         </div>
     </section>
 
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <p class="section-whisper">words from fellow dreamers</p>
+            <h2 class="section-title">Testimonials</h2>
+        </div>
+
+        <div class="testimonials-carousel">
+            <div class="testimonial-slide active">
+                <p class="testimonial-quote">"Pinaz transformed our e-commerce platform into something that doesn't just sell — it tells a story. Our conversion rate increased by 156% in the first quarter alone."</p>
+                <p class="testimonial-author">SARAH CHEN</p>
+                <p class="testimonial-role">VP OF PRODUCT, LUXE BRANDS</p>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-quote">"Working with Pinaz is like watching an artist at work. She sees patterns in data that others miss, and turns insights into experiences that customers genuinely love."</p>
+                <p class="testimonial-author">MARCUS RIVERA</p>
+                <p class="testimonial-role">CEO, DIGITAL COLLECTIVE</p>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-quote">"The marketplace ecosystem Pinaz designed for us didn't just meet expectations — it redefined what we thought was possible. $85M in GMV within the first year."</p>
+                <p class="testimonial-author">AISHA PATEL</p>
+                <p class="testimonial-role">FOUNDER, BAZAAR GLOBAL</p>
+            </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-quote">"Pinaz has this rare ability to balance aesthetic beauty with ruthless functionality. Every pixel serves a purpose, every interaction feels intentional."</p>
+                <p class="testimonial-author">JAMES WHITFIELD</p>
+                <p class="testimonial-role">DESIGN DIRECTOR, ROSENBERG & CO.</p>
+            </div>
+        </div>
+
+        <div class="testimonial-dots">
+            <button class="testimonial-dot active" data-index="0"></button>
+            <button class="testimonial-dot" data-index="1"></button>
+            <button class="testimonial-dot" data-index="2"></button>
+            <button class="testimonial-dot" data-index="3"></button>
+        </div>
+
+        <div class="testimonial-nav">
+            <button class="testimonial-prev">&#8592;</button>
+            <button class="testimonial-next">&#8594;</button>
+        </div>
+    </section>
+
     <!-- FOOTER -->
     <footer>
         <div class="footer-content">
@@ -1269,12 +1627,13 @@
             </p>
 
             <div class="footer-links">
-                <a href="#">LINKEDIN</a>
-                <a href="#">TWITTER</a>
-                <a href="#">EMAIL</a>
+                <a href="https://www.linkedin.com/in/pinaz-patel/" target="_blank" rel="noopener noreferrer" style="color: var(--white);">LINKEDIN</a>
+                <a href="https://github.com/pinaz-patel" target="_blank" rel="noopener noreferrer">GITHUB</a>
+                <a href="https://www.upwork.com/" target="_blank" rel="noopener noreferrer">UPWORK</a>
+                <a href="mailto:hello@pinaz-patel.com">EMAIL</a>
             </div>
 
-            <p class="footer-end">© 2024 Pinaz Patel — Where commerce becomes poetry</p>
+            <p class="footer-end">© 2025 Pinaz Patel — Where commerce becomes poetry</p>
         </div>
     </footer>
 
@@ -1286,7 +1645,13 @@
             <p class="modal-whisper">Speak the word to unlock the dreams</p>
             <input type="password" id="password" placeholder="• • • • •">
             <button class="btn btn-primary" onclick="checkPass()">ENTER</button>
+            <a href="https://www.linkedin.com/in/pinaz-patel/" target="_blank" rel="noopener noreferrer" class="modal-linkedin">CONNECT ON LINKEDIN →</a>
         </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <div class="arrow-up"></div>
     </div>
 
     <script>
@@ -1617,7 +1982,7 @@
             }, '-=400');
 
             mainTL.add({
-                targets: '.scroll-poetry',
+                targets: '.scroll-down-arrow',
                 opacity: [0, 1],
                 translateY: [20, 0],
                 duration: 800
@@ -1986,6 +2351,213 @@
             easing: 'easeInOutSine',
             loop: true
         });
+
+        // ============================================
+        // ROTATING HERO TEXT
+        // ============================================
+        const rotatingTitles = [
+            'UX/UI SPECIALIST',
+            'PRODUCT DESIGNER',
+            'ECOMMERCE VISIONARY',
+            'DESIGN STRATEGIST'
+        ];
+        let currentTitleIndex = 0;
+        const rotatingTextEl = document.querySelector('.rotating-text');
+
+        function animateRotatingText() {
+            const title = rotatingTitles[currentTitleIndex];
+            rotatingTextEl.innerHTML = title.split('').map(char =>
+                `<span class="char-animate">${char === ' ' ? '&nbsp;' : char}</span>`
+            ).join('');
+
+            anime({
+                targets: '.rotating-text .char-animate',
+                opacity: [0, 1],
+                translateY: [10, 0],
+                duration: 400,
+                delay: anime.stagger(30),
+                easing: 'easeOutExpo',
+                complete: () => {
+                    setTimeout(() => {
+                        anime({
+                            targets: '.rotating-text .char-animate',
+                            opacity: [1, 0],
+                            translateY: [0, -10],
+                            duration: 300,
+                            delay: anime.stagger(20),
+                            easing: 'easeInExpo',
+                            complete: () => {
+                                currentTitleIndex = (currentTitleIndex + 1) % rotatingTitles.length;
+                                animateRotatingText();
+                            }
+                        });
+                    }, 2500);
+                }
+            });
+        }
+
+        // Start rotating text after boot sequence
+        setTimeout(animateRotatingText, 4000);
+
+        // ============================================
+        // NAV HIDE/SHOW ON SCROLL
+        // ============================================
+        let lastScrollY = 0;
+        let ticking = false;
+        const navEl = document.querySelector('nav');
+
+        function updateNav() {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > 100) {
+                navEl.classList.add('nav-scrolled');
+            } else {
+                navEl.classList.remove('nav-scrolled');
+            }
+
+            if (currentScrollY > lastScrollY && currentScrollY > 200) {
+                navEl.classList.add('nav-hidden');
+            } else {
+                navEl.classList.remove('nav-hidden');
+            }
+
+            lastScrollY = currentScrollY;
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateNav);
+                ticking = true;
+            }
+        });
+
+        // ============================================
+        // SCROLL DOWN ARROW ANIMATION
+        // ============================================
+        // This is animated in the main sequence via startMainSequence
+
+        // ============================================
+        // BACK TO TOP BUTTON
+        // ============================================
+        const backToTopBtn = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 600) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // ============================================
+        // TESTIMONIALS CAROUSEL
+        // ============================================
+        const slides = document.querySelectorAll('.testimonial-slide');
+        const dots = document.querySelectorAll('.testimonial-dot');
+        const prevBtn = document.querySelector('.testimonial-prev');
+        const nextBtn = document.querySelector('.testimonial-next');
+        let currentSlide = 0;
+        let testimonialInterval;
+
+        function goToSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % slides.length);
+        }
+
+        function prevSlide() {
+            goToSlide((currentSlide - 1 + slides.length) % slides.length);
+        }
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                goToSlide(parseInt(dot.dataset.index));
+                resetAutoPlay();
+            });
+        });
+
+        if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoPlay(); });
+        if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoPlay(); });
+
+        function startAutoPlay() {
+            testimonialInterval = setInterval(nextSlide, 6000);
+        }
+
+        function resetAutoPlay() {
+            clearInterval(testimonialInterval);
+            startAutoPlay();
+        }
+
+        startAutoPlay();
+
+        // ============================================
+        // TESTIMONIALS SCROLL ANIMATION
+        // ============================================
+        const testimonialsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    anime({
+                        targets: '.testimonials .section-whisper',
+                        opacity: [0, 1],
+                        translateY: [20, 0],
+                        duration: 800
+                    });
+                    anime({
+                        targets: '.testimonials .section-title',
+                        opacity: [0, 1],
+                        translateY: [30, 0],
+                        duration: 1000,
+                        delay: 200
+                    });
+                    anime({
+                        targets: '.testimonials-carousel',
+                        opacity: [0, 1],
+                        translateY: [30, 0],
+                        duration: 1200,
+                        delay: 400
+                    });
+                    anime({
+                        targets: '.testimonial-dots, .testimonial-nav',
+                        opacity: [0, 1],
+                        duration: 800,
+                        delay: 800
+                    });
+                    testimonialsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const testimonialsSection = document.querySelector('.testimonials');
+        if (testimonialsSection) testimonialsObserver.observe(testimonialsSection);
+
+        // ============================================
+        // RESUME BUTTON SCROLL ANIMATION
+        // ============================================
+        const resumeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    anime({
+                        targets: '.resume-btn',
+                        opacity: [0, 1],
+                        translateY: [10, 0],
+                        duration: 800,
+                        delay: 800,
+                        easing: 'easeOutExpo'
+                    });
+                    resumeObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const resumeBtn = document.querySelector('.resume-btn');
+        if (resumeBtn) resumeObserver.observe(resumeBtn);
     </script>
 </body>
 </html>
