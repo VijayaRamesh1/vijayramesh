@@ -1,0 +1,228 @@
+Requirements Doc
+Pinaz-Patel.com
+
+Figma file - https://www.figma.com/file/P4FObJwtUY4TJVCtNVNzJD/Pinaz-Case-Studies?type=design&node-id=704-1315&t=x7L835d19cPziqL4-4
+
+Prototype link -
+https://www.figma.com/proto/P4FObJwtUY4TJVCtNVNzJD/Pinaz-Case-Studies?page-id=52%3A1501&type=design&node-id=704-1315&viewport=-1102%2C647%2C0.07&scaling=min-zoom&starting-point-node-id=704%3A1401
+
+
+
+Tabs - Home, About, 3 Case Studies Pages
+Domain to be attached - www. Pinaz-patel.com (let me know what info you need for this)
+
+Home- Animation Reference 
+https://www.sophiewestfall.com
+Project Stacking part needs to be replicated into pinaz.com projects part
+Notice how the nav disappears with the user scrolls down and how it comes up when the user scrolls up
+Menu should have same animation 
+Menu should have downloadable resume attached
+
+https://www.emidesigned.com
+1. Part where the text is changing to be replicated on the hero image (product designer will change to UX designer, graphic designer, etc)
+
+
+Case Study Pages
+            Must be password protected.
+            Give some  simple Parallax effects to text and images on this page- Parallax in such a  way that each section comes up in the view port while scrolling
+            .mov file to be embedded in an ipad (sent by email)
+            Show an arrow at the bottom of the Page to scroll up when at the bottom.
+
+
+About Page 
+Resume to be downloadable 
+Social media links will be updated here
+
+Responsive
+Website will be responsive for major screen resolutions including ipad and mobile
+
+
+
+
+FEEDBACK MAY 28
+ACTION POINT
+STATUS BY KULDEEP
+NAVIGATION
+
+
+Remove beige color, replace with white
+👍
+Navigation should go under Case Studies
+❌ Working
+Make animation smoother like reference link
+👍
+     2. HERO IMAGE
+
+
+Graphic too big, make smaller like in Figma
+👍
+Copy: Hello! Part has lot of spacing
+👍
+“Animated text” font is different
+👍
+Add UX/UI specialist to the list, it will be first followed by product designer and AI enthusiast
+👍
+AI enthusiast font size is looking big, check font size and make one point smaller?
+👍
+
+
+
+
+Text animation looping is not smooth
+👍
+    3. MENU
+
+
+Cancel button to be moved a bit to the left
+👍
+Case Study arrow to move closer and make whole word and arrow clickable
+👍
+Add LInkedin and Resume links
+👍
+Add links to the case studies
+ 👍
+Add other two case studies, I can see only one right now
+👍
+Case study should open and close on clicking, arrows should change accordingly, check figma file
+👍
+
+
+
+4. TESTIMONIALS
+
+
+A, Needs to be sticky, playground should not be seen. Should see Testimonial and Footer in the viewport
+👍
+B. Auto next is happening too fast, slow it down
+
+
+👍
+C. Do we need a next arrow so help users go to next testimonials or dots are enough?
+👍
+D. Switch colors of testimonial and footer
+👍
+E. Make testimonial font size one/two size bigger 20pt
+👍
+5. FOOTER
+
+
+All links should work				
+👍
+Skills should not have any links, only text
+👍
+6. ABOUT
+
+
+Remove Resume button under photo		
+👍
+Make logo and Skills sticky on top, make this section white background	(animation)
+👍 animation added on page load
+ 7. ROSENBERG CASE STUDY
+
+
+Remove back button
+
+
+👍
+Icons are blur
+👍
+Update with client testimonial design as on homepage
+👍
+
+
+Up arrow FAB back to top
+👍
+Next Case Study link on the top
+👍
+Ipad frame with mov file
+
+
+.
+Space increase between logo and copy
+👍
+8. PASWORD PROTECTION
+👍
+MAY 31 Wed
+
+
+Add github logo - Pinaz
+
+
+
+
+
+
+NEW
+
+Not working properly on Safari
+Domain and hosting
+
+Password list 10 - Pinaz 👍
+Send password message - PInaz👍
+Email Abhi and Kuldeep about hosting/Cpanel  👍
+Is it responsive - PInaz check
+
+
+Jun 2
+
+
+List of new passwords
+uxdesignpinaz
+pinazuxdesign
+uxdesign
+
+
+👍
+Make passwords expire after browser is closed
+
+
+Change “Click here” in password window to “Connect on Linkedin.”
+👍
+Please provide video for password edit
+https://www.awesomescreenshot.com/video/18025372?key=7b52d1006948c41b4aa3c40253f83730
+Take me through Password Protection on Monday
+
+
+Make LinkedIn in the footer in white
+👍
+
+
+Correct “Next Page (2/3) on Ludus case study to correct formatting
+👍
+Something wrong with “Next Page” interaction between the 3 case studies, please check
+👍
+Update .mov file on Spaces page (sent by email)
+
+
+MOBILE & IPAD
+
+
+Make animation text and graphic bigger and centre it.
+👍
+Make Footer center aligned
+👍
+Make Skillset on About page centre aligned
+👍
+JUNE 7
+
+JUNE 7 
+Remove AI enthusiast
+👍
+Animation clunky again after superwoman word
+ Please check once
+Add down arrow under the hero image
+ Please check once
+Password pop up CTA - to be made BLUE and Bold
+👍
+Rosenberg Case is missing the last part of text on left and image on right
+👍
+Not provided with Testimonial edit video
+https://www.awesomescreenshot.com/video/18174872?key=c6c75edbb855cb64def8e009947246df
+On menu page, Upwork logo is blur and smaller than Linkined logo, please replace with correct size and clarity
+👍
+Back to top on case study pages
+👍
+.mov video is getting cut on spaces case study page
+❌
+
+
