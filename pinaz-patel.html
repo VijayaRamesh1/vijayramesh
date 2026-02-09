@@ -293,14 +293,89 @@
             border-radius: 50%;
         }
 
-        /* Floating Rose Petals */
-        .petal {
+        /* Film Grain Overlay */
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.03;
+            mix-blend-mode: multiply;
+        }
+
+        /* Project Images */
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s ease;
+            filter: grayscale(40%) contrast(1.1);
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.08);
+            filter: grayscale(0%) contrast(1);
+        }
+
+        .project-img-overlay {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: var(--red);
-            border-radius: 50% 0 50% 50%;
-            opacity: 0;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 30%, rgba(196, 30, 58, 0.08) 100%);
+            z-index: 2;
+            transition: opacity 0.6s ease;
+        }
+
+        .project-card:hover .project-img-overlay {
+            opacity: 0.5;
+        }
+
+        /* About Image */
+        .about-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%) contrast(1.05);
+            transition: transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.8s ease;
+            z-index: 0;
+        }
+
+        .about-visual:hover .about-img {
+            transform: scale(1.04);
+            filter: grayscale(0%) contrast(1);
+        }
+
+        .about-frame {
+            z-index: 1;
+        }
+
+        .about-accent, .about-accent-2 {
+            z-index: 2;
+        }
+
+        /* Cursor Trail Canvas */
+        #cursor-trail {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Reveal Animation Helpers */
+        .reveal-up {
+            clip-path: inset(100% 0 0 0);
+            transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .reveal-up.revealed {
+            clip-path: inset(0 0 0 0);
+        }
+
+        /* Parallax Scroll Text */
+        .parallax-text {
+            transition: transform 0.1s linear;
+            will-change: transform;
         }
 
         /* Abstract Art Element */
@@ -1321,6 +1396,12 @@
     <div class="cursor-ring"></div>
     <div class="cursor-dot"></div>
 
+    <!-- Cursor Trail Canvas -->
+    <canvas id="cursor-trail"></canvas>
+
+    <!-- Film Grain Overlay -->
+    <canvas class="grain-overlay" id="grain-canvas"></canvas>
+
     <!-- Side Text -->
     <div class="side-text left">DREAMS INTO REALITY</div>
     <div class="side-text right">COMMERCE AS ART</div>
@@ -1379,11 +1460,6 @@
             </div>
         </div>
 
-        <!-- Floating Petals -->
-        <div class="petal" style="top: 20%; left: 15%;"></div>
-        <div class="petal" style="top: 70%; left: 80%;"></div>
-        <div class="petal" style="top: 40%; right: 10%;"></div>
-
         <!-- Hero Content -->
         <div class="hero-content">
             <p class="hero-whisper">where commerce meets dreams</p>
@@ -1423,13 +1499,8 @@
         <div class="projects-gallery">
             <div class="project-card" onclick="openModal()">
                 <div class="project-visual">
-                    <div class="project-art">
-                        <svg viewBox="0 0 200 200" class="art-flow">
-                            <path d="M20,100 Q60,20 100,100 T180,100" stroke-dasharray="5,5"/>
-                            <path d="M20,120 Q60,40 100,120 T180,120" />
-                            <circle cx="100" cy="100" r="30" fill="rgba(196,30,58,0.1)" stroke="none"/>
-                        </svg>
-                    </div>
+                    <img class="project-img" src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80" alt="The Infinite Bazaar - Marketplace Design" loading="lazy">
+                    <div class="project-img-overlay"></div>
                 </div>
                 <div class="project-info">
                     <p class="project-number">Dream I</p>
@@ -1444,14 +1515,8 @@
 
             <div class="project-card" onclick="openModal()">
                 <div class="project-visual">
-                    <div class="project-art">
-                        <svg viewBox="0 0 200 200" class="art-flow">
-                            <rect x="60" y="60" width="80" height="80" fill="none" stroke-width="1"/>
-                            <rect x="70" y="70" width="60" height="60" fill="rgba(196,30,58,0.08)" stroke="none"/>
-                            <line x1="100" y1="40" x2="100" y2="160"/>
-                            <line x1="40" y1="100" x2="160" y2="100"/>
-                        </svg>
-                    </div>
+                    <img class="project-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="The Seamless Passage - Conversion Design" loading="lazy">
+                    <div class="project-img-overlay"></div>
                 </div>
                 <div class="project-info">
                     <p class="project-number">Dream II</p>
@@ -1466,15 +1531,8 @@
 
             <div class="project-card" onclick="openModal()">
                 <div class="project-visual">
-                    <div class="project-art">
-                        <svg viewBox="0 0 200 200" class="art-flow">
-                            <circle cx="60" cy="100" r="25" fill="rgba(196,30,58,0.1)" stroke-width="1"/>
-                            <circle cx="140" cy="80" r="20" fill="none" stroke-width="1"/>
-                            <circle cx="140" cy="130" r="15" fill="rgba(196,30,58,0.05)" stroke-width="1"/>
-                            <line x1="85" y1="95" x2="120" y2="82"/>
-                            <line x1="85" y1="105" x2="125" y2="125"/>
-                        </svg>
-                    </div>
+                    <img class="project-img" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" alt="The Oracle - AI Personalization" loading="lazy">
+                    <div class="project-img-overlay"></div>
                 </div>
                 <div class="project-info">
                     <p class="project-number">Dream III</p>
@@ -1505,6 +1563,7 @@
     <section class="about" id="about">
         <div class="about-grid">
             <div class="about-visual">
+                <img class="about-img" src="https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80" alt="Creative workspace" loading="lazy">
                 <div class="about-frame"></div>
                 <div class="about-accent"></div>
                 <div class="about-accent-2"></div>
@@ -1656,7 +1715,7 @@
 
     <script>
         // ============================================
-        // DREAM CANVAS - Floating particles
+        // INTERACTIVE CONSTELLATION CANVAS
         // ============================================
         const canvas = document.getElementById('dream-canvas');
         const ctx = canvas.getContext('2d');
@@ -1668,43 +1727,176 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        const particles = [];
-        const particleCount = 30;
+        const nodes = [];
+        const nodeCount = 50;
+        const connectionDistance = 150;
+        const mouseInfluenceRadius = 200;
+        let canvasMouseX = -1000, canvasMouseY = -1000;
 
-        for (let i = 0; i < particleCount; i++) {
-            particles.push({
+        for (let i = 0; i < nodeCount; i++) {
+            nodes.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                vx: (Math.random() - 0.5) * 0.3,
-                vy: (Math.random() - 0.5) * 0.3,
-                size: Math.random() * 3 + 1,
-                opacity: Math.random() * 0.15 + 0.05,
-                isRed: Math.random() > 0.7
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                baseSize: Math.random() * 2 + 1,
+                size: Math.random() * 2 + 1,
+                isRed: Math.random() > 0.6,
+                pulseOffset: Math.random() * Math.PI * 2
             });
         }
 
-        function drawParticles() {
+        function drawConstellation() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const time = Date.now() * 0.001;
 
-            particles.forEach(p => {
+            // Draw connections
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < connectionDistance) {
+                        const opacity = (1 - dist / connectionDistance) * 0.15;
+                        const midX = (nodes[i].x + nodes[j].x) / 2;
+                        const midY = (nodes[i].y + nodes[j].y) / 2;
+                        const mouseDist = Math.hypot(midX - canvasMouseX, midY - canvasMouseY);
+                        const mouseBoost = mouseDist < mouseInfluenceRadius ? (1 - mouseDist / mouseInfluenceRadius) * 0.3 : 0;
+
+                        ctx.beginPath();
+                        ctx.strokeStyle = (nodes[i].isRed || nodes[j].isRed)
+                            ? `rgba(196, 30, 58, ${opacity + mouseBoost})`
+                            : `rgba(100, 100, 100, ${opacity * 0.5 + mouseBoost * 0.3})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Draw and update nodes
+            nodes.forEach(n => {
+                const mouseDist = Math.hypot(n.x - canvasMouseX, n.y - canvasMouseY);
+                const pulse = Math.sin(time * 2 + n.pulseOffset) * 0.5 + 0.5;
+
+                // Mouse repulsion with elastic return
+                if (mouseDist < mouseInfluenceRadius && mouseDist > 0) {
+                    const force = (1 - mouseDist / mouseInfluenceRadius) * 1.5;
+                    const angle = Math.atan2(n.y - canvasMouseY, n.x - canvasMouseX);
+                    n.vx += Math.cos(angle) * force * 0.05;
+                    n.vy += Math.sin(angle) * force * 0.05;
+                    n.size = n.baseSize + force * 2;
+                } else {
+                    n.size += (n.baseSize - n.size) * 0.05;
+                }
+
+                // Damping
+                n.vx *= 0.99;
+                n.vy *= 0.99;
+
+                const opacity = n.isRed ? 0.12 + pulse * 0.08 : 0.06 + pulse * 0.04;
+
                 ctx.beginPath();
-                ctx.fillStyle = p.isRed
-                    ? `rgba(196, 30, 58, ${p.opacity})`
-                    : `rgba(45, 45, 45, ${p.opacity * 0.5})`;
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = n.isRed
+                    ? `rgba(196, 30, 58, ${opacity})`
+                    : `rgba(45, 45, 45, ${opacity})`;
+                ctx.arc(n.x, n.y, n.size, 0, Math.PI * 2);
                 ctx.fill();
 
-                p.x += p.vx;
-                p.y += p.vy;
+                // Glow for red nodes near mouse
+                if (n.isRed && mouseDist < mouseInfluenceRadius) {
+                    ctx.beginPath();
+                    ctx.fillStyle = `rgba(196, 30, 58, ${(1 - mouseDist / mouseInfluenceRadius) * 0.08})`;
+                    ctx.arc(n.x, n.y, n.size * 4, 0, Math.PI * 2);
+                    ctx.fill();
+                }
 
-                if (p.x < 0) p.x = canvas.width;
-                if (p.x > canvas.width) p.x = 0;
-                if (p.y < 0) p.y = canvas.height;
-                if (p.y > canvas.height) p.y = 0;
+                n.x += n.vx;
+                n.y += n.vy;
+
+                if (n.x < 0) n.x = canvas.width;
+                if (n.x > canvas.width) n.x = 0;
+                if (n.y < 0) n.y = canvas.height;
+                if (n.y > canvas.height) n.y = 0;
             });
 
-            requestAnimationFrame(drawParticles);
+            requestAnimationFrame(drawConstellation);
         }
+
+        // ============================================
+        // CURSOR TRAIL - Elegant fading ribbon
+        // ============================================
+        const trailCanvas = document.getElementById('cursor-trail');
+        const trailCtx = trailCanvas.getContext('2d');
+        const trailPoints = [];
+        const maxTrailPoints = 20;
+
+        function resizeTrailCanvas() {
+            trailCanvas.width = window.innerWidth;
+            trailCanvas.height = window.innerHeight;
+        }
+        resizeTrailCanvas();
+        window.addEventListener('resize', resizeTrailCanvas);
+
+        function drawTrail() {
+            trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+
+            if (trailPoints.length > 2) {
+                for (let i = 1; i < trailPoints.length; i++) {
+                    const p = trailPoints[i];
+                    const prev = trailPoints[i - 1];
+                    const progress = i / trailPoints.length;
+                    const width = progress * 2;
+
+                    trailCtx.beginPath();
+                    trailCtx.strokeStyle = `rgba(196, 30, 58, ${progress * 0.15})`;
+                    trailCtx.lineWidth = width;
+                    trailCtx.lineCap = 'round';
+                    trailCtx.moveTo(prev.x, prev.y);
+                    trailCtx.lineTo(p.x, p.y);
+                    trailCtx.stroke();
+                }
+            }
+
+            // Age out old points
+            if (trailPoints.length > 0) {
+                trailPoints.shift();
+            }
+
+            requestAnimationFrame(drawTrail);
+        }
+        drawTrail();
+
+        // ============================================
+        // FILM GRAIN - Subtle editorial texture
+        // ============================================
+        const grainCanvas = document.getElementById('grain-canvas');
+        const grainCtx = grainCanvas.getContext('2d');
+
+        function resizeGrain() {
+            grainCanvas.width = window.innerWidth / 2;
+            grainCanvas.height = window.innerHeight / 2;
+        }
+        resizeGrain();
+        window.addEventListener('resize', resizeGrain);
+
+        function renderGrain() {
+            const imageData = grainCtx.createImageData(grainCanvas.width, grainCanvas.height);
+            const data = imageData.data;
+            for (let i = 0; i < data.length; i += 4) {
+                const v = Math.random() * 255;
+                data[i] = v;
+                data[i + 1] = v;
+                data[i + 2] = v;
+                data[i + 3] = 255;
+            }
+            grainCtx.putImageData(imageData, 0, 0);
+        }
+
+        // Render grain at lower FPS for performance
+        setInterval(renderGrain, 100);
 
         // ============================================
         // CUSTOM CURSOR
@@ -1717,6 +1909,8 @@
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
+            canvasMouseX = e.clientX;
+            canvasMouseY = e.clientY;
 
             anime({
                 targets: cursorRing,
@@ -1728,6 +1922,10 @@
 
             cursorDot.style.left = e.clientX - 4 + 'px';
             cursorDot.style.top = e.clientY - 4 + 'px';
+
+            // Feed cursor trail
+            trailPoints.push({ x: e.clientX, y: e.clientY });
+            if (trailPoints.length > maxTrailPoints) trailPoints.shift();
 
             // Parallax floating shapes
             const shapes = document.querySelectorAll('.floating-shape');
@@ -1845,7 +2043,7 @@
                 complete: () => {
                     document.querySelector('.boot-sequence').style.display = 'none';
                     startMainSequence();
-                    drawParticles();
+                    drawConstellation();
                 }
             }, '+=600');
 
@@ -1912,25 +2110,6 @@
                 duration: 1000,
                 delay: anime.stagger(200)
             }, '-=1000');
-
-            mainTL.add({
-                targets: '.petal',
-                opacity: [0, 0.3],
-                duration: 1500,
-                delay: anime.stagger(200)
-            }, '-=1500');
-
-            // Floating petals animation
-            anime({
-                targets: '.petal',
-                translateY: [0, -30, 0],
-                translateX: [0, 15, 0],
-                rotate: [0, 45, 0],
-                duration: 4000,
-                easing: 'easeInOutSine',
-                loop: true,
-                delay: anime.stagger(500)
-            });
 
             mainTL.add({
                 targets: '.hero-whisper',
@@ -2558,6 +2737,104 @@
 
         const resumeBtn = document.querySelector('.resume-btn');
         if (resumeBtn) resumeObserver.observe(resumeBtn);
+
+        // ============================================
+        // PARALLAX SCROLL - Manifesto text floats
+        // ============================================
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+
+            // Manifesto text parallax
+            const manifesto = document.querySelector('.manifesto-text');
+            if (manifesto) {
+                const rect = manifesto.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const offset = (rect.top - window.innerHeight / 2) * 0.08;
+                    manifesto.style.transform = `translateY(${offset}px)`;
+                }
+            }
+
+            // Hero frame parallax depth
+            const frame = document.querySelector('.surreal-frame');
+            if (frame && scrollY < window.innerHeight) {
+                frame.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.15}px)) scale(${1 - scrollY * 0.0003})`;
+                frame.style.opacity = Math.max(0, 1 - scrollY * 0.002);
+            }
+
+            // Impact numbers counter trigger - count up effect
+            const impactSection = document.querySelector('.impact');
+            if (impactSection) {
+                const rect = impactSection.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8 && !impactSection.dataset.counted) {
+                    impactSection.dataset.counted = 'true';
+                    animateCounters();
+                }
+            }
+        });
+
+        // ============================================
+        // IMPACT NUMBER COUNTER ANIMATION
+        // ============================================
+        function animateCounters() {
+            const counters = [
+                { el: document.querySelectorAll('.impact-number')[0], target: 247, prefix: '$', suffix: 'M' },
+                { el: document.querySelectorAll('.impact-number')[1], target: 12, prefix: '', suffix: 'M+' },
+                { el: document.querySelectorAll('.impact-number')[2], target: 156, prefix: '', suffix: '%' }
+            ];
+
+            counters.forEach(c => {
+                if (!c.el) return;
+                let current = 0;
+                const step = c.target / 60;
+                const interval = setInterval(() => {
+                    current += step;
+                    if (current >= c.target) {
+                        current = c.target;
+                        clearInterval(interval);
+                    }
+                    c.el.textContent = c.prefix + Math.round(current) + c.suffix;
+                }, 25);
+            });
+        }
+
+        // ============================================
+        // PROJECT IMAGE PARALLAX ON HOVER
+        // ============================================
+        document.querySelectorAll('.project-card').forEach(card => {
+            const img = card.querySelector('.project-img');
+            if (!img) return;
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+                const moveX = (x - 0.5) * 15;
+                const moveY = (y - 0.5) * 15;
+
+                img.style.transform = `scale(1.08) translate(${moveX}px, ${moveY}px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                img.style.transform = 'scale(1) translate(0, 0)';
+            });
+        });
+
+        // ============================================
+        // SMOOTH SECTION REVEAL ON SCROLL
+        // ============================================
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.project-visual').forEach(el => {
+            el.classList.add('reveal-up');
+            revealObserver.observe(el);
+        });
     </script>
 </body>
 </html>
