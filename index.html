@@ -390,7 +390,125 @@
         .footer:hover {
             box-shadow: 0 8px 25px rgba(0,255,65,0.3);
         }
-        
+
+        /* Header glitch on hover */
+        .header h1:hover { animation: glitch 0.3s infinite; }
+        @keyframes glitch {
+            0%  { text-shadow: 2px 0 #ff0000, -2px 0 #0000ff; }
+            25% { text-shadow: -2px 0 #ff0000, 2px 0 #0000ff; }
+            50% { text-shadow: 2px 2px #ff0000, -2px -2px #0000ff; }
+            75% { text-shadow: -2px 2px #ff0000, 2px -2px #0000ff; }
+            100%{ text-shadow: 0 0 #ff0000, 0 0 #0000ff; }
+        }
+
+        /* ── Floating Chat Widget ── */
+        .chat-widget-toggle {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            width: 60px; height: 60px;
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            border: 2px solid #00ff41;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #000;
+            box-shadow: 0 4px 20px rgba(0,255,65,0.4);
+            transition: all 0.3s;
+        }
+        .chat-widget-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0,255,65,0.6);
+        }
+        .chat-widget-panel {
+            position: fixed;
+            bottom: 100px; right: 30px;
+            width: 400px; max-height: 500px;
+            z-index: 9998;
+            display: none;
+            flex-direction: column;
+            background: rgba(0,0,0,0.95);
+            border: 2px solid #00ff41;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,255,65,0.2);
+        }
+        .chat-widget-panel.open { display: flex; }
+        .chat-widget-panel::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,65,0.03) 2px, rgba(0,255,65,0.03) 4px);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .cw-titlebar {
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #00ff41;
+            flex-shrink: 0;
+        }
+        .cw-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .cw-dot-r { background: #ff5f57; }
+        .cw-dot-y { background: #ffbd2e; }
+        .cw-dot-g { background: #28c840; }
+        .cw-title { color: #00ff41; font-size: 0.8rem; margin-left: 8px; flex: 1; font-family: 'JetBrains Mono', monospace; }
+        .cw-body {
+            padding: 15px;
+            overflow-y: auto;
+            flex: 1;
+            max-height: 420px;
+            position: relative;
+            z-index: 2;
+        }
+        .cw-body::-webkit-scrollbar { width: 5px; }
+        .cw-body::-webkit-scrollbar-track { background: #111; }
+        .cw-body::-webkit-scrollbar-thumb { background: #00ff41; border-radius: 3px; }
+        .cw-message { margin-bottom: 14px; animation: cwFade 0.3s ease-out; }
+        @keyframes cwFade { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+        .cw-bot { color: #00ff41; font-size: 0.82rem; white-space: pre-wrap; line-height: 1.6; font-family: 'JetBrains Mono', monospace; }
+        .cw-user { color: #00d4ff; font-size: 0.82rem; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; }
+        .cw-user::before { content: '> '; color: #666; }
+        .cw-options { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+        .cw-opt-btn {
+            background: transparent;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+            position: relative;
+            z-index: 3;
+        }
+        .cw-opt-btn:hover { background: #00ff41; color: #000; box-shadow: 0 0 10px rgba(0,255,65,0.4); }
+
+        /* ── Access Granted Flash ── */
+        .access-granted-overlay {
+            display: none; position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,255,65,0.15);
+            z-index: 99999;
+            justify-content: center; align-items: center;
+        }
+        .access-granted-overlay.show { display: flex; animation: agFlash 1.2s ease-out forwards; }
+        .access-granted-text {
+            color: #00ff41; font-size: 3rem; font-weight: 700;
+            text-shadow: 0 0 30px rgba(0,255,65,0.8);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        @keyframes agFlash { 0%{opacity:1} 70%{opacity:1} 100%{opacity:0} }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             body {
@@ -421,8 +539,10 @@
             .section-content {
                 padding: 25px;
             }
+            .chat-widget-panel { width: calc(100vw - 30px); right: 15px; bottom: 95px; }
+            .chat-widget-toggle { width: 50px; height: 50px; font-size: 1.1rem; bottom: 20px; right: 15px; }
         }
-        
+
         @media (max-width: 480px) {
             .header h1 {
                 font-size: 1.9rem;
@@ -521,43 +641,131 @@
         </footer>
     </div>
 
+    <!-- Access Granted Flash -->
+    <div class="access-granted-overlay" id="accessOverlay">
+        <div class="access-granted-text">ACCESS GRANTED</div>
+    </div>
+
+    <!-- Floating Chat Widget -->
+    <div class="chat-widget-toggle" id="chatToggle" onclick="toggleChatWidget()">&gt;_</div>
+    <div class="chat-widget-panel" id="chatPanel">
+        <div class="cw-titlebar">
+            <div class="cw-dot cw-dot-r"></div>
+            <div class="cw-dot cw-dot-y"></div>
+            <div class="cw-dot cw-dot-g"></div>
+            <span class="cw-title">vijaybot@mainframe</span>
+        </div>
+        <div class="cw-body" id="cwBody"></div>
+    </div>
+
     <script>
-        // Simple scroll to anchor functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Handle anchor links
-            const anchorLinks = document.querySelectorAll('a[href^="#"]');
-            
-            anchorLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
+    /* ── Chat Tree (shared) ── */
+    const CHAT_TREE={root:{text:"[ VIJAY_OS v2.0 ] System initialized...\n> I'm VijayBot, the sassy digital twin. Pick a topic.",options:[{label:"What does Vijay actually do?",next:"what_do"},{label:"What's it like being an AI PM?",next:"ai_pm_life"},{label:"What are you building right now?",next:"building"},{label:"Hot takes on AI?",next:"hot_takes"},{label:"How do I reach you?",next:"contact"},{label:"Tell me something fun",next:"fun_fact"}]},what_do:{text:"> sudo describe --role\n\nVijay is an AI Product Manager. Translation: professional translator between humans who want magic and engineers who speak in tensors.\n\nHe turns \"make it smarter\" into actual PRDs that don't make ML engineers cry.",options:[{label:"What kind of AI products?",next:"what_do_products"},{label:"Is that even a real job?",next:"what_do_real"},{label:"Back to main menu",next:"root"}]},what_do_products:{text:"> ls ~/projects/\n\nRecommendation systems, NLP features, computer vision pipelines, LLM-powered tools... basically anything where you feed data in and pray useful things come out.",options:[{label:"What's the hardest part?",next:"what_do_hard"},{label:"Back to main menu",next:"root"}]},what_do_real:{text:"> grep 'real job' /etc/doubters.log\n\nSomeone has to sit between the CEO saying \"just add AI to it\" and the ML engineer muttering about data quality. That person is Vijay.",options:[{label:"Fair enough. What's he building?",next:"building"},{label:"Back to main menu",next:"root"}]},what_do_hard:{text:"> cat /var/log/pain_points.txt\n\nManaging expectations. Everyone thinks AI is magic until you tell them the model needs 6 months of training data and can't read minds.",options:[{label:"Back to main menu",next:"root"}]},ai_pm_life:{text:"> journalctl --unit=daily-life\n\nImagine being a translator at the UN, except one side speaks Python and the other speaks PowerPoint.",options:[{label:"What's a typical day?",next:"ai_pm_day"},{label:"Best part of the job?",next:"ai_pm_best"},{label:"Back to main menu",next:"root"}]},ai_pm_day:{text:"> crontab -l\n\n09:00 - Standup. Someone's model is broken.\n10:00 - Write PRD. Rewrite. Rewrite again.\n13:00 - Lunch (reading papers counts right?)\n16:00 - Say \"transformers\" to sound smart.\n17:00 - Debug conspiracy theory recommendations.",options:[{label:"That sounds chaotic. I love it.",next:"ai_pm_best"},{label:"Back to main menu",next:"root"}]},ai_pm_best:{text:"> echo $BEST_PART\n\nWhen a user doesn't even notice the AI -- they just think \"wow, this product is smart.\" That invisible magic? That's the high.",options:[{label:"Back to main menu",next:"root"}]},building:{text:"> git log --oneline -5\n\nDeep in LLMs + product UX. Making AI assistants that don't suck. Also: agentic workflows and this very website (meta).",options:[{label:"Tell me about agents",next:"building_agents"},{label:"Tech stack?",next:"building_stack"},{label:"Back to main menu",next:"root"}]},building_agents:{text:"> ps aux | grep agents\n\nAI that doesn't just answer questions but DOES things. Browse the web, write code, manage workflows. The future is agents all the way down.",options:[{label:"Sounds like Skynet",next:"building_skynet"},{label:"Back to main menu",next:"root"}]},building_skynet:{text:"> sudo rm -rf /skynet_concerns\n\nRelax. We're at \"AI that can book a restaurant\" stage, not \"AI decides humanity is inefficient.\" Baby steps.",options:[{label:"Back to main menu",next:"root"}]},building_stack:{text:"> cat requirements.txt\n\nPython, LangChain, LLM APIs, React when forced, pure HTML when rebellious. PyTorch, HuggingFace. Docker, GitHub Actions, and prayers.",options:[{label:"Back to main menu",next:"root"}]},hot_takes:{text:"> cat /dev/unpopular_opinions\n\nPick your spice level:",options:[{label:"Mild",next:"hot_mild"},{label:"Spicy",next:"hot_spicy"},{label:"Maximum heat",next:"hot_max"},{label:"Back to main menu",next:"root"}]},hot_mild:{text:"> echo mild.txt\n\nMost companies don't need AI. They need a better SQL query. But \"we added AI\" sounds way better in a board meeting.",options:[{label:"Give me spicier",next:"hot_spicy"},{label:"Back to main menu",next:"root"}]},hot_spicy:{text:"> chmod 777 spicy.txt\n\nPrompt engineering is not engineering. It's creative writing with a feedback loop.",options:[{label:"Maximum heat",next:"hot_max"},{label:"Back to main menu",next:"root"}]},hot_max:{text:"> sudo cat /etc/shadow_opinions\n\nAGI discourse is astrology for tech bros. If your startup's moat is a GPT wrapper, you don't have a startup. You have a feature.",options:[{label:"I'm offended and impressed",next:"root"}]},contact:{text:"> cat ~/.contact_info\n\nVijay's inbox is open:",options:[{label:"Twitter/X",next:"contact_twitter"},{label:"LinkedIn",next:"contact_linkedin"},{label:"Medium",next:"contact_medium"},{label:"Back to main menu",next:"root"}]},contact_twitter:{text:"> @VjK1124637 on X\n\nHot takes, AI PM memes, and occasionally something useful. DMs open.",options:[{label:"Other ways?",next:"contact"},{label:"Back to main menu",next:"root"}]},contact_linkedin:{text:"> /in/vijayakrishnar\n\nThe professional Vijay. Less sass, more synergies.",options:[{label:"Other ways?",next:"contact"},{label:"Back to main menu",next:"root"}]},contact_medium:{text:"> @veejaykris.29 on Medium\n\nLong-form thoughts on AI + PM. Always opinionated.",options:[{label:"Other ways?",next:"contact"},{label:"Back to main menu",next:"root"}]},fun_fact:{text:"> fortune | cowsay\n\nFun mode activated!",options:[{label:"Random fact",next:"fun_random"},{label:"Nerdy joke",next:"fun_joke"},{label:"Easter egg hint",next:"fun_easter"},{label:"Back to main menu",next:"root"}]},fun_random:{text:"> shuf ~/facts.txt\n\nVijay once spent 3 hours debugging a model only to discover the training labels were swapped. He now has trust issues with pandas DataFrames.",options:[{label:"Another!",next:"fun_random2"},{label:"Back to main menu",next:"root"}]},fun_random2:{text:"> shuf ~/facts.txt\n\nMost-used shortcut: Cmd+Z. He also once pushed console.log('why god why') to production.",options:[{label:"Back to main menu",next:"root"}]},fun_joke:{text:"> apt-get install humor\n\nWhy do ML engineers prefer dark chocolate?\nBecause it has less bias.",options:[{label:"Terrible. I love it.",next:"root"}]},fun_easter:{text:"> find / -name 'easter_egg'\n\nKonami code: Up Up Down Down Left Right Left Right B A\nAlso try typing \"hack\" on your keyboard.",options:[{label:"Back to main menu",next:"root"}]}};
+
+    /* ── Widget Chat Engine ── */
+    function toggleChatWidget() {
+        const panel = document.getElementById('chatPanel');
+        panel.classList.toggle('open');
+        if (panel.classList.contains('open') && !panel.dataset.init) {
+            panel.dataset.init = '1';
+            widgetNav('root');
+        }
+    }
+    function widgetNav(nodeId) {
+        const body = document.getElementById('cwBody');
+        const node = CHAT_TREE[nodeId];
+        if (!node) return;
+        const msg = document.createElement('div');
+        msg.className = 'cw-message';
+        const txt = document.createElement('div');
+        txt.className = 'cw-bot';
+        txt.textContent = node.text;
+        msg.appendChild(txt);
+        if (node.options) {
+            const wrap = document.createElement('div');
+            wrap.className = 'cw-options';
+            node.options.forEach(o => {
+                const btn = document.createElement('button');
+                btn.className = 'cw-opt-btn';
+                btn.textContent = o.label;
+                btn.addEventListener('click', () => {
+                    body.querySelectorAll('.cw-opt-btn').forEach(b => { b.disabled=true; b.style.opacity='0.4'; b.style.cursor='default'; });
+                    const u = document.createElement('div'); u.className = 'cw-message';
+                    const ut = document.createElement('div'); ut.className = 'cw-user'; ut.textContent = o.label;
+                    u.appendChild(ut); body.appendChild(u);
+                    setTimeout(() => widgetNav(o.next), 250);
                 });
+                wrap.appendChild(btn);
             });
-            
-            // Konami code easter egg
-            let konamiCode = [];
-            const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
-            
-            document.addEventListener('keydown', function(e) {
-                konamiCode.push(e.code);
-                if (konamiCode.length > konamiSequence.length) {
-                    konamiCode.shift();
-                }
-                
-                if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
-                    console.log('🎮 Konami code activated! You found the easter egg!');
-                    document.querySelector('.header').style.animation = 'pulse 0.5s ease-out 3';
-                }
+            msg.appendChild(wrap);
+        }
+        body.appendChild(msg);
+        body.scrollTop = body.scrollHeight;
+    }
+
+    /* ── Easter Eggs ── */
+    let konamiBuffer = [], hackBuffer = [];
+    const konamiSeq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];
+    const hackSeq = ['KeyH','KeyA','KeyC','KeyK'];
+
+    document.addEventListener('keydown', function(e) {
+        if (e.target.tagName === 'INPUT') return;
+        // Konami
+        konamiBuffer.push(e.code);
+        if (konamiBuffer.length > konamiSeq.length) konamiBuffer.shift();
+        if (JSON.stringify(konamiBuffer) === JSON.stringify(konamiSeq)) {
+            konamiBuffer = [];
+            triggerMatrixFlash();
+        }
+        // Hack
+        hackBuffer.push(e.code);
+        if (hackBuffer.length > hackSeq.length) hackBuffer.shift();
+        if (JSON.stringify(hackBuffer) === JSON.stringify(hackSeq)) {
+            hackBuffer = [];
+            const ov = document.getElementById('accessOverlay');
+            ov.classList.remove('show'); void ov.offsetWidth; ov.classList.add('show');
+            setTimeout(() => ov.classList.remove('show'), 1300);
+        }
+    });
+
+    function triggerMatrixFlash() {
+        const c = document.createElement('canvas');
+        c.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:99998;pointer-events:none;';
+        document.body.appendChild(c);
+        c.width = window.innerWidth; c.height = window.innerHeight;
+        const ctx = c.getContext('2d');
+        const cols = Math.floor(c.width / 14);
+        const drops = Array.from({length:cols}, () => Math.random()*c.height);
+        let f = 0;
+        (function rain() {
+            if (f++ > 300) { c.remove(); return; }
+            ctx.fillStyle = 'rgba(0,0,0,0.05)';
+            ctx.fillRect(0, 0, c.width, c.height);
+            ctx.fillStyle = '#00ff41';
+            ctx.font = '12px JetBrains Mono';
+            drops.forEach((y, i) => {
+                ctx.fillText(String.fromCharCode(0x30A0 + Math.random()*96), i*14, y);
+                if (y > c.height && Math.random() > 0.97) drops[i] = 0;
+                drops[i] += 10;
             });
+            requestAnimationFrame(rain);
+        })();
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.querySelector(link.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
+    });
+
+    // Console easter egg
+    console.log('%c\n  You found the dev console! Vijay approves.\n  Try: Konami code or type "hack"\n', 'color:#00ff41;font-family:monospace;font-size:12px;');
     </script>
+
+    <!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://vijayramesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

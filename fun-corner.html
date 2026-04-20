@@ -4,17 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fun Corner - Vijay Ramesh</title>
-    <meta name="description" content="Fun Corner - Creative content and cartoons by Vijay Ramesh">
-    
+    <meta name="description" content="Fun Corner - Interactive terminal games and chat with Vijay's AI twin">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'JetBrains Mono', monospace;
             background: linear-gradient(135deg, #00d4ff, #090979);
@@ -22,13 +18,10 @@
             padding: 40px 20px;
             line-height: 1.6;
         }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        /* Original Header Design */
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        /* ── Header ── */
         .header {
             background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
             border: 3px solid #00ff41;
@@ -38,8 +31,17 @@
             margin-bottom: 40px;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,255,65,0.2);
+            overflow: hidden;
         }
-        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent 40%, rgba(0,255,65,0.1) 50%, transparent 60%);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
+
         .terminal-prompt {
             color: #00ff41;
             font-size: 1rem;
@@ -48,40 +50,32 @@
             background: rgba(0,0,0,0.7);
             padding: 15px;
             border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace;
+            position: relative;
         }
-        
         .header-title {
-            color: #ffffff;
+            color: #fff;
             font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 15px;
             text-shadow: 0 0 10px rgba(0,255,65,0.5);
+            position: relative;
         }
-        
+        .header-title:hover { animation: glitch 0.3s infinite; }
+        @keyframes glitch {
+            0%  { text-shadow: 2px 0 #ff0000, -2px 0 #0000ff; }
+            25% { text-shadow: -2px 0 #ff0000, 2px 0 #0000ff; }
+            50% { text-shadow: 2px 2px #ff0000, -2px -2px #0000ff; }
+            75% { text-shadow: -2px 2px #ff0000, 2px -2px #0000ff; }
+            100%{ text-shadow: 0 0 #ff0000, 0 0 #0000ff; }
+        }
         .header-subtitle {
             color: #00ff41;
             font-size: 1.1rem;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
+            position: relative;
         }
-        
-        /* Creative ASCII Art */
-        .creative-visual {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin: 30px 0;
-            color: #00ff41;
-            font-size: 0.8rem;
-        }
-        
-        .ascii-section {
-            text-align: center;
-            white-space: pre;
-            line-height: 1.2;
-        }
-        
-        /* Custom Navigation */
+
+        /* ── Nav ── */
         .nav {
             display: flex;
             gap: 15px;
@@ -92,7 +86,6 @@
             border-radius: 25px;
             backdrop-filter: blur(10px);
         }
-        
         .nav-link {
             background: linear-gradient(135deg, #00ff41, #00cc33);
             color: #000;
@@ -106,313 +99,1177 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,255,65,0.3);
         }
-        
         .nav-link.active {
             background: linear-gradient(135deg, #ffffff, #f0f0f0);
             box-shadow: 0 6px 20px rgba(255,255,255,0.4);
             transform: translateY(-2px);
         }
-        
         .nav-link:not(.active):hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 25px rgba(0,255,65,0.5);
         }
-        
-        /* Content Section */
-        .content {
-            background: rgba(255,255,255,0.95);
-            border: 2px solid #00ff41;
-            border-radius: 15px;
-            padding: 50px;
-            color: #000;
+
+        /* ── Section Titles ── */
+        .section-title {
+            color: #fff;
+            font-size: 1.8rem;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0,255,65,0.5);
         }
-        
-        .fun-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #000;
-            position: relative;
-        }
-        
-        .fun-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(135deg, #00ff41, #00cc33);
-            border-radius: 2px;
-        }
-        
-        .coming-soon {
-            background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
-            border: 3px solid #00ff41;
-            padding: 50px;
-            border-radius: 20px;
-            margin: 40px 0;
-            position: relative;
+        .section-title span { color: #00ff41; }
+
+        /* ═══════════════════════════════════
+           CHAT TERMINAL
+           ═══════════════════════════════════ */
+        .chat-section { margin-bottom: 50px; }
+
+        .chat-terminal {
+            background: rgba(0,0,0,0.95);
+            border: 2px solid #00ff41;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,255,65,0.15);
+            position: relative;
         }
-        
-        .coming-soon::before {
+        .chat-terminal::after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(transparent, rgba(0,255,65,0.1), transparent 30%);
-            animation: rotate 8s linear infinite;
-        }
-        
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .coming-soon-content {
-            position: relative;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                0deg, transparent, transparent 2px,
+                rgba(0,255,65,0.03) 2px, rgba(0,255,65,0.03) 4px
+            );
+            pointer-events: none;
             z-index: 1;
         }
-        
-        .coming-soon h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #000;
+        .chat-titlebar {
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #00ff41;
         }
-        
-        .coming-soon p {
-            font-size: 1.2rem;
-            color: #333;
-            margin-bottom: 30px;
+        .titlebar-dot {
+            width: 12px; height: 12px;
+            border-radius: 50%;
         }
-        
-        .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
+        .dot-red { background: #ff5f57; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #28c840; }
+        .titlebar-text {
+            color: #00ff41;
+            font-size: 0.85rem;
+            margin-left: 10px;
+            flex: 1;
         }
-        
-        .preview-card {
-            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
-            border: 3px dashed #00ff41;
-            padding: 25px;
-            border-radius: 15px;
-            transition: all 0.4s ease;
+        .chat-body {
+            padding: 20px;
+            max-height: 450px;
+            overflow-y: auto;
             position: relative;
+            z-index: 2;
         }
-        
-        .preview-card:hover {
-            transform: translateY(-5px) rotate(2deg);
-            box-shadow: 0 10px 25px rgba(0,255,65,0.3);
-            border-style: solid;
+        .chat-body::-webkit-scrollbar { width: 6px; }
+        .chat-body::-webkit-scrollbar-track { background: #111; }
+        .chat-body::-webkit-scrollbar-thumb { background: #00ff41; border-radius: 3px; }
+
+        .chat-message {
+            margin-bottom: 18px;
+            animation: fadeInMsg 0.3s ease-out;
         }
-        
-        .preview-card h4 {
+        @keyframes fadeInMsg {
+            from { opacity:0; transform:translateY(8px); }
+            to { opacity:1; transform:translateY(0); }
+        }
+        .chat-bot-text {
+            color: #00ff41;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            line-height: 1.7;
+        }
+        .chat-user-text {
+            color: #00d4ff;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+        .chat-user-text::before { content: '> '; color: #666; }
+
+        .chat-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        .chat-option-btn {
+            background: transparent;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            transition: all 0.2s;
+            position: relative;
+            z-index: 3;
+        }
+        .chat-option-btn:hover {
+            background: #00ff41;
             color: #000;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            font-weight: 700;
+            box-shadow: 0 0 15px rgba(0,255,65,0.4);
+            transform: translateY(-1px);
         }
-        
-        .preview-card p {
-            color: #444;
-            font-size: 1rem;
+        .chat-option-btn:active { transform: scale(0.97); }
+
+        /* ═══════════════════════════════════
+           GAMES SECTION
+           ═══════════════════════════════════ */
+        .games-section { margin-bottom: 50px; }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 25px;
+        }
+        .game-card {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            border: 2px solid #00ff41;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,255,65,0.3);
+        }
+        .game-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .game-title {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .game-desc {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
             line-height: 1.5;
         }
-        
-        .main-placeholder {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border: 3px dashed #00ff41;
-            padding: 60px 40px;
-            border-radius: 20px;
-            margin-top: 30px;
+        .game-start-btn {
+            background: linear-gradient(135deg, #00ff41, #00cc33);
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+        .game-start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0,255,65,0.5);
+        }
+
+        /* ── Game Overlay ── */
+        .game-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .game-overlay.active { display: flex; }
+        .game-close-btn {
+            position: absolute;
+            top: 20px; right: 30px;
+            background: none;
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 8px 18px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.2s;
+        }
+        .game-close-btn:hover { background: #00ff41; color: #000; }
+        .game-score-display {
+            position: absolute;
+            top: 20px; left: 30px;
+            color: #00ff41;
+            font-size: 1.1rem;
+            z-index: 1001;
+        }
+
+        /* ── Typing Game ── */
+        .typing-game-area {
+            text-align: center;
+            max-width: 700px;
+            width: 90%;
+        }
+        .typing-target {
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #666;
+            min-height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 300px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
         }
-        
-        .main-placeholder::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        .typing-target .correct { color: #00ff41; }
+        .typing-target .wrong { color: #ff4444; text-decoration: underline; }
+        .typing-target .pending { color: #555; }
+        .typing-input {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,255,65,0.2), transparent);
-            transition: left 0.8s ease;
-        }
-        
-        .main-placeholder:hover {
-            border-style: solid;
-            transform: scale(1.02);
-            box-shadow: 0 15px 35px rgba(0,255,65,0.2);
-        }
-        
-        .main-placeholder:hover::before {
-            left: 100%;
-        }
-        
-        .placeholder-content {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .placeholder-emoji {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-        
-        .placeholder-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #000;
-        }
-        
-        .placeholder-subtitle {
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #00ff41;
+            border-radius: 8px;
+            padding: 15px;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: #444;
+            outline: none;
         }
-        
-        .placeholder-note {
+        .typing-input:focus { box-shadow: 0 0 15px rgba(0,255,65,0.3); }
+        .typing-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            color: #00ff41;
             font-size: 0.9rem;
-            color: #666;
-            font-style: italic;
         }
-        
-        /* Responsive Design */
+        .typing-progress {
+            color: #888;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        .typing-result {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(0,255,65,0.1);
+            border: 1px solid #00ff41;
+            border-radius: 8px;
+            color: #00ff41;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .typing-result.show { display: block; }
+
+        /* ── Matrix Game ── */
+        #matrix-canvas {
+            border: 2px solid #00ff41;
+            border-radius: 8px;
+            cursor: crosshair;
+        }
+        .matrix-hud {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 600px;
+            margin-bottom: 15px;
+            color: #00ff41;
+            font-size: 0.95rem;
+        }
+        .matrix-result {
+            margin-top: 20px;
+            color: #00ff41;
+            font-size: 1.1rem;
+            text-align: center;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .matrix-result.show { display: block; }
+
+        /* ── Snake Game ── */
+        #snake-canvas {
+            border: 2px solid #00ff41;
+            border-radius: 8px;
+        }
+        .snake-controls-mobile {
+            display: none;
+            gap: 5px;
+            margin-top: 15px;
+        }
+        .snake-dir-btn {
+            width: 50px; height: 50px;
+            background: rgba(0,255,65,0.1);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .snake-dir-btn:active { background: #00ff41; color: #000; }
+
+        /* ── Footer ── */
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            color: #00ff41;
+            padding: 25px;
+            text-align: center;
+            border: 3px solid #00ff41;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            box-shadow: 0 5px 15px rgba(0,255,65,0.2);
+        }
+
+        /* ── Access Granted Flash ── */
+        .access-granted-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,255,65,0.15);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .access-granted-overlay.show {
+            display: flex;
+            animation: flashIn 1.2s ease-out forwards;
+        }
+        .access-granted-text {
+            color: #00ff41;
+            font-size: 3rem;
+            font-weight: 700;
+            text-shadow: 0 0 30px rgba(0,255,65,0.8);
+            animation: pulseText 0.3s ease-in-out 3;
+        }
+        @keyframes flashIn {
+            0% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        @keyframes pulseText {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* ── Responsive ── */
         @media (max-width: 768px) {
-            body {
-                padding: 20px 10px;
-            }
-            
-            .header {
-                padding: 40px 25px;
-            }
-            
-            .content {
-                padding: 35px 25px;
-            }
-            
-            .creative-visual {
-                flex-direction: column;
-                gap: 25px;
-            }
-            
-            .nav {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .preview-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .fun-title {
-                font-size: 2rem;
-            }
+            body { padding: 20px 10px; }
+            .header { padding: 35px 20px; }
+            .header-title { font-size: 1.7rem; }
+            .nav { flex-direction: column; align-items: center; }
+            .games-grid { grid-template-columns: 1fr; }
+            .chat-body { max-height: 350px; }
+            .chat-option-btn { font-size: 0.78rem; padding: 7px 12px; }
+            .snake-controls-mobile { display: grid; grid-template-columns: repeat(3,50px); justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .header-title { font-size: 1.5rem; }
+            .section-title { font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
+    <!-- Access Granted Flash -->
+    <div class="access-granted-overlay" id="accessOverlay">
+        <div class="access-granted-text">ACCESS GRANTED</div>
+    </div>
+
     <div class="container">
-        <!-- Original Header Design -->
         <header class="header">
-            <div class="terminal-prompt">vijay@creative-lab:~$ ./start_fun_corner.sh</div>
+            <div class="terminal-prompt">vijay@fun-lab:~$ ./launch_playground.sh --mode=chaos</div>
             <h1 class="header-title">The Fun Corner</h1>
-            <div class="header-subtitle">Where AI Product Management meets creative chaos</div>
-            
-            <div class="creative-visual">
-                <div class="ascii-section">   🎨 ART LAB 🎨
-      │
-  ┌───╦───┐
-  │ IDEA │
-  └───┬───┘
-      │
-  ┌───╦───┐
-  │COMIC │ → 📜
-  └───────┘</div>
-                
-                <div class="ascii-section">  🤖 + 📈 = 😄
-       │
-   ┌───╦───┐
-   │ MEME │
-   │ MAGIC│
-   └───┬───┘
-       │
-   ┌───╦───┐
-   │VIRAL │ → 🚀
-   └───────┘</div>
-                
-                <div class="ascii-section">  📊 STORY ARC 📊
-       │
-   ┌───╦───┐
-   │SETUP │
-   └───┬───┘
-       │
-   ┌───╦───┐
-   │PUNCH│ → 😂
-   └───────┘</div>
-            </div>
-            
-            <nav class="nav">
-                <a href="index.html" class="nav-link">blog</a>
-                <a href="about.html" class="nav-link">about</a>
-                <a href="fun-corner.html" class="nav-link active">fun corner</a>
-            </nav>
+            <div class="header-subtitle">Where terminal meets entertainment</div>
         </header>
 
-        <!-- Content Section -->
-        <div class="content">
-            <h1 class="fun-title">Creative Playground</h1>
-            
-            <div class="coming-soon">
-                <div class="coming-soon-content">
-                    <h3>AI PM Comic Universe</h3>
-                    <p>Get ready for illustrated adventures from the trenches of AI product management!</p>
-                    
-                    <div class="preview-grid">
-                        <div class="preview-card">
-                            <h4>"🤖 PM Diaries"</h4>
-                            <p>Weekly comic strips documenting the hilarious reality of managing AI products in the wild...</p>
-                        </div>
-                        <div class="preview-card">
-                            <h4>"📊 Model Mayhem"</h4>
-                            <p>Visual stories of when machine learning models decide to have a mind of their own...</p>
-                        </div>
-                        <div class="preview-card">
-                            <h4>"🗣️ Stakeholder Stories"</h4>
-                            <p>Illustrated tales of the most creative feature requests from executives and users...</p>
-                        </div>
-                    </div>
-                    
-                    <div class="main-placeholder">
-                        <div class="placeholder-content">
-                            <span class="placeholder-emoji">🎨🤖📚</span>
-                            <div class="placeholder-title">Comics & Creative Content Studio</div>
-                            <div class="placeholder-subtitle">Where AI product chaos becomes art</div>
-                            <div class="placeholder-note">
-                                Subscribe to my newsletter or follow on social media to be the first to see new comics and creative content!
-                            </div>
-                        </div>
-                    </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">blog</a>
+            <a href="about.html" class="nav-link">about</a>
+            <a href="fun-corner.html" class="nav-link active">fun corner</a>
+        </nav>
+
+        <!-- ═══ CHAT TERMINAL ═══ -->
+        <section class="chat-section">
+            <h2 class="section-title">&gt; <span>VIJAY_OS</span> TERMINAL v2.0</h2>
+            <div class="chat-terminal">
+                <div class="chat-titlebar">
+                    <div class="titlebar-dot dot-red"></div>
+                    <div class="titlebar-dot dot-yellow"></div>
+                    <div class="titlebar-dot dot-green"></div>
+                    <span class="titlebar-text">vijaybot@mainframe ~ </span>
+                </div>
+                <div class="chat-body" id="chatBody"></div>
+            </div>
+        </section>
+
+        <!-- ═══ GAMES ═══ -->
+        <section class="games-section">
+            <h2 class="section-title">&gt; <span>ARCADE</span> MODE</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <span class="game-icon">&#9000;</span>
+                    <div class="game-title">Terminal Typer</div>
+                    <div class="game-desc">Type hacker commands as fast as you can. 10 rounds. No typos allowed (well, they count against you).</div>
+                    <button class="game-start-btn" onclick="startTypingGame()">initialize</button>
+                </div>
+                <div class="game-card">
+                    <span class="game-icon">&#9763;</span>
+                    <div class="game-title">Hack the Mainframe</div>
+                    <div class="game-desc">Click the bright targets in the Matrix rain before they escape. Miss 3 and the firewall wins.</div>
+                    <button class="game-start-btn" onclick="startMatrixGame()">initialize</button>
+                </div>
+                <div class="game-card">
+                    <span class="game-icon">&#9731;</span>
+                    <div class="game-title">Terminal Snake</div>
+                    <div class="game-desc">Classic snake, terminal edition. Consume data packets. Don't crash into the firewall.</div>
+                    <button class="game-start-btn" onclick="startSnakeGame()">initialize</button>
                 </div>
             </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2025 Vijay Ramesh &bull; Built with curiosity, caffeine, and questionable humor</p>
+        </footer>
+    </div>
+
+    <!-- ═══ GAME OVERLAYS ═══ -->
+    <div class="game-overlay" id="typingOverlay">
+        <button class="game-close-btn" onclick="closeGame('typingOverlay')">[ESC] ABORT</button>
+        <div class="game-score-display" id="typingScoreDisplay"></div>
+        <div class="typing-game-area">
+            <div class="typing-progress" id="typingProgress">ROUND 1/10</div>
+            <div class="typing-target" id="typingTarget"></div>
+            <input type="text" class="typing-input" id="typingInput" placeholder="type the command above..." autocomplete="off" spellcheck="false">
+            <div class="typing-stats">
+                <span>WPM: <strong id="typingWpm">0</strong></span>
+                <span>ACC: <strong id="typingAcc">100</strong>%</span>
+                <span>TIME: <strong id="typingTime">0.0</strong>s</span>
+            </div>
+            <div class="typing-result" id="typingResult"></div>
         </div>
     </div>
+
+    <div class="game-overlay" id="matrixOverlay">
+        <button class="game-close-btn" onclick="closeGame('matrixOverlay')">[ESC] ABORT</button>
+        <div class="matrix-hud" id="matrixHud">
+            <span>SCORE: <strong id="matrixScore">0</strong></span>
+            <span>TIME: <strong id="matrixTimer">60</strong>s</span>
+            <span>MISSES: <strong id="matrixMisses">0</strong>/3</span>
+        </div>
+        <canvas id="matrix-canvas" width="600" height="400"></canvas>
+        <div class="matrix-result" id="matrixResult"></div>
+    </div>
+
+    <div class="game-overlay" id="snakeOverlay">
+        <button class="game-close-btn" onclick="closeGame('snakeOverlay')">[ESC] ABORT</button>
+        <div class="game-score-display" id="snakeScoreDisplay">PACKETS_CONSUMED: 0</div>
+        <canvas id="snake-canvas" width="400" height="400"></canvas>
+        <div class="snake-controls-mobile" id="snakeMobile">
+            <div></div>
+            <button class="snake-dir-btn" onclick="setSnakeDir(0,-1)">&uarr;</button>
+            <div></div>
+            <button class="snake-dir-btn" onclick="setSnakeDir(-1,0)">&larr;</button>
+            <button class="snake-dir-btn" onclick="setSnakeDir(0,1)">&darr;</button>
+            <button class="snake-dir-btn" onclick="setSnakeDir(1,0)">&rarr;</button>
+        </div>
+    </div>
+
+<script>
+/* ═══════════════════════════════════════
+   CHAT TREE DATA
+   ═══════════════════════════════════════ */
+const CHAT_TREE = {
+    root: {
+        text: "[ VIJAY_OS v2.0 ] System initialized...\n> I'm VijayBot, the sassy digital twin. I know things. Pick a topic.",
+        options: [
+            { label: "What does Vijay actually do?", next: "what_do" },
+            { label: "What's it like being an AI PM?", next: "ai_pm_life" },
+            { label: "What are you building right now?", next: "building" },
+            { label: "Hot takes on AI?", next: "hot_takes" },
+            { label: "How do I reach you?", next: "contact" },
+            { label: "Tell me something fun", next: "fun_fact" }
+        ]
+    },
+    what_do: {
+        text: "> sudo describe --role\n\nVijay is an AI Product Manager. Translation: professional translator between humans who want magic and engineers who speak in tensors.\n\nHe turns \"make it smarter\" into actual PRDs that don't make ML engineers cry.",
+        options: [
+            { label: "What kind of AI products?", next: "what_do_products" },
+            { label: "Is that even a real job?", next: "what_do_real" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    what_do_products: {
+        text: "> ls ~/projects/\n\nRecommendation systems, NLP features, computer vision pipelines, LLM-powered tools... basically anything where you feed data in and pray useful things come out.\n\nProducts that millions use without knowing there's a tiny army of ML models behind the curtain.",
+        options: [
+            { label: "What's the hardest part?", next: "what_do_hard" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    what_do_real: {
+        text: "> grep 'real job' /etc/doubters.log\n\nSomeone has to sit between the CEO saying \"just add AI to it\" and the ML engineer muttering about data quality.\n\nThat person is Vijay. He's the diplomat in the war between ambition and CUDA memory limits. And yes, he gets paid for it.",
+        options: [
+            { label: "Fair enough. What's he building?", next: "building" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    what_do_hard: {
+        text: "> cat /var/log/pain_points.txt\n\nManaging expectations. Everyone thinks AI is magic until you tell them the model needs 6 months of training data and can't read minds.\n\nAlso: explaining to stakeholders why 85% accuracy is actually good and no, we can't \"just make it 100%.\"",
+        options: [
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    ai_pm_life: {
+        text: "> journalctl --unit=daily-life\n\nImagine being a translator at the UN, except one side speaks Python and the other speaks PowerPoint.\n\nMornings: sprint planning, explaining why \"the model is hallucinating\" is a technical term.\nAfternoons: writing PRDs that make both engineers and execs nod.",
+        options: [
+            { label: "What's a typical day?", next: "ai_pm_day" },
+            { label: "Best part of the job?", next: "ai_pm_best" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    ai_pm_day: {
+        text: "> crontab -l\n\n09:00 - Standup. Someone's model is broken.\n10:00 - Write PRD. Rewrite. Rewrite again.\n11:00 - Explain to design why AI can't be pixel-perfect\n13:00 - Lunch (reading papers counts as lunch right?)\n14:00 - Data review. The training set is cursed.\n16:00 - Stakeholder update. Say \"transformers\" to sound smart.\n17:00 - Debug why prod recommends conspiracy theories.\n18:00 - Question life choices. Remember it's actually fun.",
+        options: [
+            { label: "That sounds chaotic. I love it.", next: "ai_pm_best" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    ai_pm_best: {
+        text: "> echo $BEST_PART\n\nThe moment when something you shipped actually works. When a user doesn't even notice the AI -- they just think \"wow, this product is smart.\"\n\nThat invisible magic? That's the high.\n\nAlso: getting paid to read AI papers and call it \"competitive analysis.\"",
+        options: [
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    building: {
+        text: "> git log --oneline -5\n\nAlways something. Right now: deep in the intersection of LLMs and product UX -- making AI assistants that don't suck.\n\nAlso tinkering with agentic workflows, knowledge bases, and this very website (meta, I know).",
+        options: [
+            { label: "Tell me about the agent stuff", next: "building_agents" },
+            { label: "What's your tech stack?", next: "building_stack" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    building_agents: {
+        text: "> ps aux | grep agents\n\nAgentic AI is where it's at. Building systems where AI agents reason, plan, and execute multi-step tasks autonomously.\n\nThink: AI that doesn't just answer questions but actually DOES things. Browse the web, write code, manage workflows.\n\nThe future is agents all the way down.",
+        options: [
+            { label: "Sounds like Skynet", next: "building_skynet" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    building_skynet: {
+        text: "> sudo rm -rf /skynet_concerns\n\nRelax. We're at \"AI that can book a restaurant reservation without calling the wrong number\" stage.\n\nNot \"AI that decides humanity is inefficient.\"\n\nBaby steps. Though I won't lie -- when the agent debugs its own code at 2am, it does feel slightly unsettling.",
+        options: [
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    building_stack: {
+        text: "> cat requirements.txt\n\nPython (obviously), LangChain/LlamaIndex for agents, LLM APIs galore, a sprinkle of React when forced, and pure HTML/CSS/JS when feeling rebellious (like this site).\n\nFor ML: PyTorch, HuggingFace, the usual suspects.\nDeployment: Docker, GitHub Actions, and prayers.",
+        options: [
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    hot_takes: {
+        text: "> cat /dev/unpopular_opinions\n\nOh, you want controversy? Pick your spice level:",
+        options: [
+            { label: "Mild", next: "hot_mild" },
+            { label: "Spicy", next: "hot_spicy" },
+            { label: "Maximum heat", next: "hot_max" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    hot_mild: {
+        text: "> echo mild.txt\n\nMost companies don't need AI. They need a better SQL query and someone who actually reads the data.\n\nBut \"we added AI\" sounds way better in a board meeting than \"we fixed our WHERE clause.\"",
+        options: [
+            { label: "Give me spicier", next: "hot_spicy" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    hot_spicy: {
+        text: "> chmod 777 /hot_takes/spicy.txt\n\nPrompt engineering is not engineering. It's creative writing with a feedback loop.\n\nCalling yourself an \"AI engineer\" because you write good system prompts is like calling yourself a chef because you're great at ordering DoorDash.",
+        options: [
+            { label: "Maximum heat please", next: "hot_max" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    hot_max: {
+        text: "> sudo cat /etc/shadow_opinions\n\nAGI discourse is astrology for tech bros. Nobody knows when it's coming, everyone has a prediction, and your timeline says more about your personality than your technical knowledge.\n\nAlso: if your AI startup's entire moat is \"we have a GPT wrapper,\" you don't have a startup. You have a feature.",
+        options: [
+            { label: "I'm both offended and impressed", next: "root" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    contact: {
+        text: "> cat ~/.contact_info\n\nVijay's inbox is open (response times may vary based on debugging rabbit hole depth):",
+        options: [
+            { label: "Twitter/X", next: "contact_twitter" },
+            { label: "LinkedIn", next: "contact_linkedin" },
+            { label: "Medium articles", next: "contact_medium" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    contact_twitter: {
+        text: "> open https://x.com/VjK1124637\n\nTwitter/X: @VjK1124637\n\nWhere Vijay posts hot takes, AI PM memes, and occasionally something useful. DMs are open if you're not a bot (ironic, considering the context).",
+        options: [
+            { label: "Other ways to connect?", next: "contact" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    contact_linkedin: {
+        text: "> open https://linkedin.com/in/vijayakrishnar\n\nLinkedIn: /in/vijayakrishnar\n\nThe professional version of Vijay lives here. Less sass, more \"leveraging synergies.\" Connect for shop talk, interesting roles, or network growth.",
+        options: [
+            { label: "Other ways to connect?", next: "contact" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    contact_medium: {
+        text: "> open https://medium.com/@veejaykris.29\n\nMedium: @veejaykris.29\n\nLong-form thoughts on AI, product management, and the chaos where they intersect. Always opinionated, occasionally insightful.",
+        options: [
+            { label: "Other ways to connect?", next: "contact" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    fun_fact: {
+        text: "> fortune | cowsay\n\nFun mode activated. What kind of fun?",
+        options: [
+            { label: "Random fact about Vijay", next: "fun_random" },
+            { label: "A nerdy joke", next: "fun_joke" },
+            { label: "Easter egg hunt hint", next: "fun_easter" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    fun_random: {
+        text: "> shuf -n 1 ~/facts.txt\n\nVijay once spent 3 hours debugging a model that wasn't learning, only to discover the training data labels were swapped.\n\nHe now has trust issues with pandas DataFrames.\n\nAlso: he codes exclusively to synthwave and believes dark mode is the only valid IDE theme.",
+        options: [
+            { label: "Another one!", next: "fun_random2" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    fun_random2: {
+        text: "> shuf -n 1 ~/facts.txt\n\nVijay's most-used shortcut is Cmd+Z. Not because he makes mistakes -- because he's constantly experimenting and rolling back.\n\nThat's not a bug, it's a feature of his creative process.\n\nHe also once pushed console.log('why god why') to production.",
+        options: [
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    fun_joke: {
+        text: "> apt-get install humor\n\nWhy do ML engineers prefer dark chocolate?\nBecause it has less bias.\n\n...\n\nA PM, a data scientist, and an ML engineer walk into a bar. The PM says \"build something amazing.\" The data scientist says \"I need more data.\" The ML engineer says \"it works on my laptop.\"\n\nNobody gets a drink because they can't agree on requirements.",
+        options: [
+            { label: "That was terrible. I love it.", next: "root" },
+            { label: "Back to main menu", next: "root" }
+        ]
+    },
+    fun_easter: {
+        text: "> find / -name 'easter_egg' 2>/dev/null\n\nPsst... try the Konami code on any page:\nUp Up Down Down Left Right Left Right B A\n\nAlso: type \"hack\" on your keyboard anywhere on this site.\n\nAnd rumor has it the Matrix rain game has a hidden message if you score above 200...",
+        options: [
+            { label: "Back to main menu", next: "root" }
+        ]
+    }
+};
+
+/* ═══════════════════════════════════════
+   CHAT ENGINE
+   ═══════════════════════════════════════ */
+class HackerChat {
+    constructor(containerId, tree) {
+        this.container = document.getElementById(containerId);
+        this.tree = tree;
+        this.navigate('root');
+    }
+    navigate(nodeId) {
+        const node = this.tree[nodeId];
+        if (!node) return;
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'chat-message';
+
+        const textEl = document.createElement('div');
+        textEl.className = 'chat-bot-text';
+        textEl.textContent = node.text;
+        msgDiv.appendChild(textEl);
+
+        if (node.options && node.options.length) {
+            const optWrap = document.createElement('div');
+            optWrap.className = 'chat-options';
+            node.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'chat-option-btn';
+                btn.textContent = opt.label;
+                btn.addEventListener('click', () => this.selectOption(opt.label, opt.next));
+                optWrap.appendChild(btn);
+            });
+            msgDiv.appendChild(optWrap);
+        }
+        this.container.appendChild(msgDiv);
+        this.container.scrollTop = this.container.scrollHeight;
+    }
+    selectOption(label, nextId) {
+        const btns = this.container.querySelectorAll('.chat-option-btn');
+        btns.forEach(b => { b.disabled = true; b.style.opacity = '0.4'; b.style.cursor = 'default'; });
+
+        const userDiv = document.createElement('div');
+        userDiv.className = 'chat-message';
+        const userText = document.createElement('div');
+        userText.className = 'chat-user-text';
+        userText.textContent = label;
+        userDiv.appendChild(userText);
+        this.container.appendChild(userDiv);
+
+        setTimeout(() => this.navigate(nextId), 300);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    new HackerChat('chatBody', CHAT_TREE);
+});
+
+/* ═══════════════════════════════════════
+   TYPING SPEED GAME
+   ═══════════════════════════════════════ */
+const TYPING_COMMANDS = [
+    "ls -la",
+    "cd /var/log",
+    "cat /etc/passwd",
+    "sudo apt-get update",
+    "ssh root@192.168.1.1",
+    "chmod 755 deploy.sh",
+    "docker run -it ubuntu bash",
+    "git push origin main --force",
+    "kubectl get pods --all-namespaces",
+    "find / -name '*.log' -mtime -7 | head"
+];
+
+let typingState = { round: 0, startTime: 0, totalChars: 0, correctChars: 0, times: [] };
+
+function escapeHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function startTypingGame() {
+    typingState = { round: 0, startTime: 0, totalChars: 0, correctChars: 0, times: [] };
+    document.getElementById('typingOverlay').classList.add('active');
+    document.getElementById('typingResult').classList.remove('show');
+    document.getElementById('typingResult').textContent = '';
+    loadTypingRound();
+}
+
+function loadTypingRound() {
+    if (typingState.round >= TYPING_COMMANDS.length) {
+        showTypingResults();
+        return;
+    }
+    const cmd = TYPING_COMMANDS[typingState.round];
+    const target = document.getElementById('typingTarget');
+    target.innerHTML = cmd.split('').map(c =>
+        '<span class="pending">' + (c === ' ' ? '&nbsp;' : escapeHtml(c)) + '</span>'
+    ).join('');
+    document.getElementById('typingProgress').textContent = 'ROUND ' + (typingState.round + 1) + '/' + TYPING_COMMANDS.length;
+    const input = document.getElementById('typingInput');
+    input.value = '';
+    input.focus();
+    typingState.startTime = 0;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('typingInput');
+    input.addEventListener('input', () => {
+        if (typingState.round >= TYPING_COMMANDS.length) return;
+        const cmd = TYPING_COMMANDS[typingState.round];
+        if (!typingState.startTime) typingState.startTime = Date.now();
+        const val = input.value;
+        const spans = document.getElementById('typingTarget').querySelectorAll('span');
+        let correct = 0;
+        for (let i = 0; i < spans.length; i++) {
+            if (i < val.length) {
+                if (val[i] === cmd[i]) { spans[i].className = 'correct'; correct++; }
+                else { spans[i].className = 'wrong'; }
+            } else {
+                spans[i].className = 'pending';
+            }
+        }
+        const elapsed = (Date.now() - typingState.startTime) / 1000;
+        const words = val.length / 5;
+        const wpm = elapsed > 0 ? Math.round((words / elapsed) * 60) : 0;
+        const acc = val.length > 0 ? Math.round((correct / val.length) * 100) : 100;
+        document.getElementById('typingWpm').textContent = wpm;
+        document.getElementById('typingAcc').textContent = acc;
+        document.getElementById('typingTime').textContent = elapsed.toFixed(1);
+
+        if (val.length >= cmd.length) {
+            typingState.totalChars += cmd.length;
+            typingState.correctChars += correct;
+            typingState.times.push(elapsed);
+            typingState.round++;
+            setTimeout(loadTypingRound, 400);
+        }
+    });
+});
+
+function showTypingResults() {
+    const totalTime = typingState.times.reduce((a, b) => a + b, 0);
+    const avgWpm = Math.round(((typingState.totalChars / 5) / totalTime) * 60);
+    const acc = Math.round((typingState.correctChars / typingState.totalChars) * 100);
+    let rank = 'SCRIPT KIDDIE';
+    if (avgWpm > 80 && acc > 95) rank = 'ELITE HACKER';
+    else if (avgWpm > 60 && acc > 90) rank = 'SYS ADMIN';
+    else if (avgWpm > 40) rank = 'DEV INTERN';
+    const el = document.getElementById('typingResult');
+    el.textContent = '> MISSION COMPLETE\n\nAVG WPM: ' + avgWpm + '\nACCURACY: ' + acc + '%\nTOTAL TIME: ' + totalTime.toFixed(1) + 's\n\nRANK: ' + rank;
+    el.classList.add('show');
+    document.getElementById('typingInput').value = '';
+    document.getElementById('typingTarget').innerHTML = '<span style="color:#00ff41">ALL COMMANDS EXECUTED</span>';
+}
+
+/* ═══════════════════════════════════════
+   HACK THE MAINFRAME (Matrix Click Game)
+   ═══════════════════════════════════════ */
+let matrixState = { running: false, score: 0, misses: 0, timeLeft: 60, targets: [], drops: [], animId: 0, timerId: 0, spawnId: 0, speed: 1.5 };
+
+function startMatrixGame() {
+    const canvas = document.getElementById('matrix-canvas');
+    const w = Math.min(600, window.innerWidth - 40);
+    canvas.width = w;
+    canvas.height = Math.round(w * 0.67);
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    matrixState = { running: true, score: 0, misses: 0, timeLeft: 60, targets: [], drops: [], animId: 0, timerId: 0, spawnId: 0, speed: 1.5 };
+    document.getElementById('matrixOverlay').classList.add('active');
+    document.getElementById('matrixResult').classList.remove('show');
+    document.getElementById('matrixScore').textContent = '0';
+    document.getElementById('matrixTimer').textContent = '60';
+    document.getElementById('matrixMisses').textContent = '0';
+
+    const cols = Math.floor(canvas.width / 14);
+    matrixState.drops = Array.from({length: cols}, () => Math.random() * -50);
+
+    matrixState.spawnId = setInterval(spawnTarget, 2000);
+    matrixState.timerId = setInterval(() => {
+        matrixState.timeLeft--;
+        document.getElementById('matrixTimer').textContent = matrixState.timeLeft;
+        if (matrixState.timeLeft <= 30) matrixState.speed = 2.2;
+        if (matrixState.timeLeft <= 15) matrixState.speed = 3;
+        if (matrixState.timeLeft <= 0) endMatrixGame();
+    }, 1000);
+
+    spawnTarget();
+    matrixLoop();
+}
+
+function spawnTarget() {
+    if (!matrixState.running) return;
+    const canvas = document.getElementById('matrix-canvas');
+    matrixState.targets.push({
+        x: 14 + Math.random() * (canvas.width - 40),
+        y: -20,
+        char: String.fromCharCode(0x30A0 + Math.random() * 96),
+        speed: matrixState.speed + Math.random() * 0.8
+    });
+}
+
+function matrixLoop() {
+    if (!matrixState.running) return;
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#003300';
+    ctx.font = '12px JetBrains Mono, monospace';
+    matrixState.drops.forEach((y, i) => {
+        const char = String.fromCharCode(0x30A0 + Math.random() * 96);
+        ctx.fillText(char, i * 14, y);
+        if (y > canvas.height && Math.random() > 0.98) matrixState.drops[i] = 0;
+        matrixState.drops[i] += 8;
+    });
+
+    ctx.font = 'bold 22px JetBrains Mono, monospace';
+    matrixState.targets = matrixState.targets.filter(t => {
+        t.y += t.speed;
+        ctx.fillStyle = '#00ff41';
+        ctx.shadowColor = '#00ff41';
+        ctx.shadowBlur = 15;
+        ctx.fillText(t.char, t.x, t.y);
+        ctx.shadowBlur = 0;
+        ctx.strokeStyle = '#00ff41';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(t.x + 6, t.y - 7, 16, 0, Math.PI * 2);
+        ctx.stroke();
+        if (t.y > canvas.height) {
+            matrixState.misses++;
+            document.getElementById('matrixMisses').textContent = matrixState.misses;
+            if (matrixState.misses >= 3) endMatrixGame();
+            return false;
+        }
+        return true;
+    });
+
+    matrixState.animId = requestAnimationFrame(matrixLoop);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('matrix-canvas').addEventListener('click', (e) => {
+        if (!matrixState.running) return;
+        const rect = e.target.getBoundingClientRect();
+        const scaleX = e.target.width / rect.width;
+        const scaleY = e.target.height / rect.height;
+        const mx = (e.clientX - rect.left) * scaleX;
+        const my = (e.clientY - rect.top) * scaleY;
+        let hit = false;
+        matrixState.targets = matrixState.targets.filter(t => {
+            if (!hit && Math.abs(mx - (t.x + 6)) < 22 && Math.abs(my - (t.y - 7)) < 22) {
+                hit = true;
+                matrixState.score += 10;
+                document.getElementById('matrixScore').textContent = matrixState.score;
+                return false;
+            }
+            return true;
+        });
+    });
+});
+
+function endMatrixGame() {
+    matrixState.running = false;
+    cancelAnimationFrame(matrixState.animId);
+    clearInterval(matrixState.timerId);
+    clearInterval(matrixState.spawnId);
+    let msg = 'FINAL SCORE: ' + matrixState.score;
+    if (matrixState.score >= 200) msg += '\n\n> SECRET: The mainframe whispers... "Vijay ships on Fridays."';
+    else if (matrixState.score >= 100) msg += '\n\nNot bad, hacker. The firewall respects you.';
+    else msg += '\n\nThe firewall wins this round. Try again.';
+    const el = document.getElementById('matrixResult');
+    el.textContent = msg;
+    el.classList.add('show');
+}
+
+/* ═══════════════════════════════════════
+   TERMINAL SNAKE
+   ═══════════════════════════════════════ */
+let snakeState = { running: false, snake: [], dir: {x:1,y:0}, nextDir: {x:1,y:0}, food: {}, score: 0, speed: 150, intervalId: 0, gridSize: 20, canvas: null, ctx: null, cellW: 20, gameOver: false };
+
+function startSnakeGame() {
+    document.getElementById('snakeOverlay').classList.add('active');
+    const canvas = document.getElementById('snake-canvas');
+    const size = Math.min(400, window.innerWidth - 60);
+    canvas.width = size;
+    canvas.height = size;
+    snakeState.canvas = canvas;
+    snakeState.ctx = canvas.getContext('2d');
+    snakeState.gridSize = 20;
+    snakeState.cellW = Math.floor(size / snakeState.gridSize);
+    snakeState.snake = [{x:5,y:10},{x:4,y:10},{x:3,y:10}];
+    snakeState.dir = {x:1,y:0};
+    snakeState.nextDir = {x:1,y:0};
+    snakeState.score = 0;
+    snakeState.speed = 150;
+    snakeState.running = true;
+    snakeState.gameOver = false;
+    placeFood();
+    document.getElementById('snakeScoreDisplay').textContent = 'PACKETS_CONSUMED: 0';
+    if (snakeState.intervalId) clearInterval(snakeState.intervalId);
+    snakeState.intervalId = setInterval(snakeTick, snakeState.speed);
+    drawSnake();
+}
+
+function setSnakeDir(x, y) {
+    if (x === -snakeState.dir.x && y === 0) return;
+    if (y === -snakeState.dir.y && x === 0) return;
+    snakeState.nextDir = {x, y};
+}
+
+function placeFood() {
+    let pos;
+    do {
+        pos = { x: Math.floor(Math.random() * snakeState.gridSize), y: Math.floor(Math.random() * snakeState.gridSize) };
+    } while (snakeState.snake.some(s => s.x === pos.x && s.y === pos.y));
+    snakeState.food = pos;
+}
+
+function snakeTick() {
+    if (!snakeState.running) return;
+    snakeState.dir = snakeState.nextDir;
+    const head = {
+        x: (snakeState.snake[0].x + snakeState.dir.x + snakeState.gridSize) % snakeState.gridSize,
+        y: (snakeState.snake[0].y + snakeState.dir.y + snakeState.gridSize) % snakeState.gridSize
+    };
+    if (snakeState.snake.some(s => s.x === head.x && s.y === head.y)) {
+        snakeState.running = false;
+        snakeState.gameOver = true;
+        clearInterval(snakeState.intervalId);
+        drawSnake();
+        return;
+    }
+    snakeState.snake.unshift(head);
+    if (head.x === snakeState.food.x && head.y === snakeState.food.y) {
+        snakeState.score++;
+        document.getElementById('snakeScoreDisplay').textContent = 'PACKETS_CONSUMED: ' + snakeState.score;
+        placeFood();
+        if (snakeState.score % 5 === 0 && snakeState.speed > 60) {
+            snakeState.speed -= 15;
+            clearInterval(snakeState.intervalId);
+            snakeState.intervalId = setInterval(snakeTick, snakeState.speed);
+        }
+    } else {
+        snakeState.snake.pop();
+    }
+    drawSnake();
+}
+
+function drawSnake() {
+    const {ctx, canvas, cellW, gridSize, snake, food, gameOver} = snakeState;
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = '#111';
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i <= gridSize; i++) {
+        ctx.beginPath(); ctx.moveTo(i*cellW, 0); ctx.lineTo(i*cellW, canvas.height); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, i*cellW); ctx.lineTo(canvas.width, i*cellW); ctx.stroke();
+    }
+
+    ctx.fillStyle = '#ff4444';
+    ctx.shadowColor = '#ff4444';
+    ctx.shadowBlur = 8;
+    ctx.font = (cellW - 2) + 'px JetBrains Mono';
+    ctx.fillText('@', food.x * cellW + 2, (food.y + 1) * cellW - 3);
+    ctx.shadowBlur = 0;
+
+    snake.forEach((s, i) => {
+        ctx.fillStyle = i === 0 ? '#00ff41' : '#00cc33';
+        ctx.shadowColor = '#00ff41';
+        ctx.shadowBlur = i === 0 ? 10 : 3;
+        ctx.font = (cellW - 2) + 'px JetBrains Mono';
+        ctx.fillText(i === 0 ? '>' : '#', s.x * cellW + 2, (s.y + 1) * cellW - 3);
+    });
+    ctx.shadowBlur = 0;
+
+    if (gameOver) {
+        ctx.fillStyle = 'rgba(0,0,0,0.7)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#ff4444';
+        ctx.font = 'bold 18px JetBrains Mono';
+        ctx.textAlign = 'center';
+        ctx.fillText('CONNECTION TERMINATED', canvas.width/2, canvas.height/2 - 15);
+        ctx.fillStyle = '#00ff41';
+        ctx.font = '14px JetBrains Mono';
+        ctx.fillText('PACKETS: ' + snakeState.score, canvas.width/2, canvas.height/2 + 15);
+        ctx.fillText('Click INITIALIZE to retry', canvas.width/2, canvas.height/2 + 40);
+        ctx.textAlign = 'start';
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    if (!snakeState.running) return;
+    switch(e.key) {
+        case 'ArrowUp': case 'w': case 'W': setSnakeDir(0,-1); e.preventDefault(); break;
+        case 'ArrowDown': case 's': case 'S': setSnakeDir(0,1); e.preventDefault(); break;
+        case 'ArrowLeft': case 'a': case 'A': setSnakeDir(-1,0); e.preventDefault(); break;
+        case 'ArrowRight': case 'd': case 'D': setSnakeDir(1,0); e.preventDefault(); break;
+    }
+});
+
+/* ═══════════════════════════════════════
+   GAME OVERLAY CONTROLS
+   ═══════════════════════════════════════ */
+function closeGame(id) {
+    document.getElementById(id).classList.remove('active');
+    if (id === 'matrixOverlay') {
+        matrixState.running = false;
+        cancelAnimationFrame(matrixState.animId);
+        clearInterval(matrixState.timerId);
+        clearInterval(matrixState.spawnId);
+    }
+    if (id === 'snakeOverlay') {
+        snakeState.running = false;
+        clearInterval(snakeState.intervalId);
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.game-overlay.active').forEach(o => closeGame(o.id));
+    }
+});
+
+/* ═══════════════════════════════════════
+   EASTER EGGS
+   ═══════════════════════════════════════ */
+let konamiBuffer = [];
+const konamiSeq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];
+let hackBuffer = [];
+const hackSeq = ['KeyH','KeyA','KeyC','KeyK'];
+
+document.addEventListener('keydown', (e) => {
+    // Skip if typing in an input
+    if (e.target.tagName === 'INPUT') return;
+
+    konamiBuffer.push(e.code);
+    if (konamiBuffer.length > konamiSeq.length) konamiBuffer.shift();
+    if (JSON.stringify(konamiBuffer) === JSON.stringify(konamiSeq)) {
+        konamiBuffer = [];
+        triggerMatrixFlash();
+    }
+
+    hackBuffer.push(e.code);
+    if (hackBuffer.length > hackSeq.length) hackBuffer.shift();
+    if (JSON.stringify(hackBuffer) === JSON.stringify(hackSeq)) {
+        hackBuffer = [];
+        triggerAccessGranted();
+    }
+});
+
+function triggerAccessGranted() {
+    const ov = document.getElementById('accessOverlay');
+    ov.classList.remove('show');
+    void ov.offsetWidth; // reflow
+    ov.classList.add('show');
+    setTimeout(() => ov.classList.remove('show'), 1300);
+}
+
+function triggerMatrixFlash() {
+    const c = document.createElement('canvas');
+    c.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:9998;pointer-events:none;';
+    document.body.appendChild(c);
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    const ctx = c.getContext('2d');
+    const cols = Math.floor(c.width / 14);
+    const drops = Array.from({length: cols}, () => Math.random() * c.height);
+    let frames = 0;
+    function rain() {
+        if (frames++ > 300) { c.remove(); return; }
+        ctx.fillStyle = 'rgba(0,0,0,0.05)';
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.fillStyle = '#00ff41';
+        ctx.font = '12px JetBrains Mono';
+        drops.forEach((y, i) => {
+            ctx.fillText(String.fromCharCode(0x30A0 + Math.random() * 96), i * 14, y);
+            if (y > c.height && Math.random() > 0.97) drops[i] = 0;
+            drops[i] += 10;
+        });
+        requestAnimationFrame(rain);
+    }
+    rain();
+}
+
+// Console easter egg
+console.log('%c' +
+    '\n  ____________________________________________________\n' +
+    ' |                                                    |\n' +
+    ' |  You found the dev console! Nice.                  |\n' +
+    ' |  Vijay approves of your curiosity.                 |\n' +
+    ' |  Try: Konami code or type "hack" on the page       |\n' +
+    ' |____________________________________________________|\n',
+    'color: #00ff41; font-family: monospace; font-size: 12px;'
+);
+</script>
+
+<!-- GoatCounter Analytics -->
+<script data-goatcounter="https://vijayramesh.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
