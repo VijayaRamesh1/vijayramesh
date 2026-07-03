@@ -40,6 +40,19 @@ To view the portfolio page:
 1.  Clone this repository.
 2.  Open the `index.html` file in your web browser.
 
+## Visitor Email Notifications on Vercel
+
+The site includes a Vercel serverless function at `/api/notify-visit` and a small browser beacon in `visitor-notify.js`. On production visits, it emails a visit summary with page, referrer, UTM data, browser/device hints, timezone, screen size, and Vercel IP location headers when available.
+
+Set these environment variables in Vercel:
+
+- `RESEND_API_KEY`: Resend API key used to send email.
+- `VISITOR_NOTIFY_TO`: Destination email address for visit notifications.
+- `VISITOR_NOTIFY_FROM`: Verified sender address in Resend. Optional; defaults to `Vijay Portfolio <onboarding@resend.dev>`.
+- `VISITOR_NOTIFY_ENABLED`: Optional. Set to `false` to disable notifications without removing code.
+
+The browser beacon skips localhost and limits notifications to once every 30 minutes per browser session to reduce duplicate emails from refreshes.
+
 ## Neural Network Visualization
 
 The neural network visualization is created using Three.js. It features:
